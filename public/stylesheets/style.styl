@@ -1,0 +1,272 @@
+body
+	padding 0
+	margin 0
+	/*font 14px "Lucida Grande", Helvetica, Arial, sans-serif*/
+	background-color #000
+
+a
+	color #00B7FF
+
+.mainBody
+	margin 0 auto
+	width 1200px
+	background-image url('/images/head.png')
+	background-repeat no-repeat
+	background-color #3e596a
+	background-position top center
+
+/* ------ header ----------*/
+
+header
+	display block
+
+header .logo
+	margin 0 auto
+	background-image url('/images/title.png')
+	width 340px
+	height 220px
+	
+.loginBlock
+	position relative
+	width 300px
+	top -210px
+	left 900px
+	color #FFFFFF
+	text-align right
+
+.loginBlock a.lbLink
+	cursor pointer
+	margin 10px 15px
+	
+.loginBlock a:link
+	color #99CCFF
+.loginBlock a:visited
+	color #99CCFF
+.loginBlock a:hover
+	color #CCFFFF
+	
+	
+/*------- main part ---------*/
+
+.mainBlock
+	margin 0 auto
+	height 600px
+	overflow hidden
+
+.columnBlock
+	width 1200px
+	-moz-column-count 3
+	-moz-column-gap 0px
+	-webkit-column-count 3
+	-webkit-column-gap 0px
+	column-count 3
+	column-gap 0px
+	z-index 1
+
+.sideCol
+	margin 0
+	border 0
+	width 400px
+	height 600px
+
+.centerCol
+	margin 0
+	width 240px
+	height 400px
+	background-image url('/images/scroll_news.png')
+	background-repeat no-repeat
+	padding 100px 80px
+	color #330000
+	z-index 1
+
+/*------- scroll content--------*/
+
+.newsHeader
+	text-align center
+	font-size 16px
+	z-index 1
+
+.newsBody
+	font-size 12px
+	z-index 1
+
+/*------- menu buttons--------*/
+
+.menuItemBlock
+
+.menuButton
+	width 280px
+	height 140px
+	margin 0 auto
+	background-repeat no-repeat
+	cursor pointer
+
+.crewButton
+	background-image url('/images/menu_p1.png')
+.crewButton:hover
+	background-image url('/images/menu_p1h.png')
+
+.roamsButton
+	background-image url('/images/menu_p2.png')
+.roamsButton:hover
+	background-image url('/images/menu_p2h.png')
+
+.rumorsButton
+	background-image url('/images/menu_p3.png')
+.rumorsButton:hover
+	background-image url('/images/menu_p3h.png')
+
+.squadButton
+	background-image url('/images/menu_n1.png')
+.squadButton:hover
+	background-image url('/images/menu_n1h.png')
+
+.missionsButton
+	background-image url('/images/menu_n2.png')
+.missionsButton:hover
+	background-image url('/images/menu_n2h.png')
+
+.legendsButton
+	background-image url('/images/menu_n3.png')
+.legendsButton:hover
+	background-image url('/images/menu_n3h.png')
+
+/*-------------- board content -------------*/
+
+.board
+	width 420px
+	height 500px
+	margin 0 auto
+	background-repeat no-repeat
+	background-image url('/images/board_p.png')
+	z-index 2
+	position relative
+	top -554px
+	/*display none*/
+	visibility hidden
+
+.boardForm
+	width 300px
+	margin 0 auto
+	font-size 14px
+	color white
+
+.loginForm
+	padding-top 100px
+
+.registForm
+	padding-top 20px
+
+.notification
+	padding-top 200px
+	text-align center
+
+.boardForm span
+	display block
+	margin-bottom 10px
+	font-family fantasy
+	font-size 18px
+	text-align center
+	
+.boardForm input[type*="text"], .boardForm input[type*="password"]
+	display block
+	width 270px
+	height 30px
+	margin-bottom 15px
+	font-size 14px
+	border 0
+	padding 0 15px
+	background transparent url('/images/scroll_h1.png')
+
+.boardForm input[type*="button"], .boardForm input[type*="submit"]
+	width 80px
+	height 30px
+	margin 5px 32px 0
+	font-size 14px
+	font-family fantasy
+	color white
+	border 0 none
+	background transparent url('/images/button_bg1.png')
+
+/*-------- cor/err icons styles ------*/
+
+.registIco
+	width 25px
+	height 25px
+	margin-bottom 37px
+.corIco
+	background-image url('/images/form_yes.png')
+.errIco
+	background-image url('/images/form_no.png')
+.registIcons
+	width 25px
+	position absolute
+	top 77px
+	right 27px
+
+/*-------- team page styles ------*/
+.teamBlock
+	margin 0 auto
+	padding 60px 80px
+	width 640px
+	height 900px
+	background-image url('/images/team_back.png')
+	overflow hidden
+
+.heading
+	margin 5px
+	padding-left 20px
+	font-size 24px
+
+.titleBlock
+	margin 5px
+	text-align center
+	font-size 36px
+	font-family fantasy
+
+.infoBlock
+	margin 5px
+	text-align left
+	font-size 16px
+
+.divider
+	margin 15px auto
+	width 300px
+	height 11px
+	background-image url('/images/divider.png')
+
+.membersBlock
+	width 630px
+	-moz-column-count 3
+	-moz-column-gap 0px
+	-webkit-column-count 3
+	-webkit-column-gap 0px
+	column-count 3
+	column-gap 0px
+
+.memberCol
+	width 210px
+	height 400px
+	text-align center
+
+.memberAvatar
+	width 120px
+	height 120px
+	margin 0 auto
+
+.defAva
+	background-image url('/images/noplayer.png')
+
+.memberName
+	margin 10px 0px
+	font-size 24px
+
+.memberCol span
+	margin 0px 2px
+
+span.underlined
+	text-decoration underline
+
+span.bold
+	font-weight bold
+
