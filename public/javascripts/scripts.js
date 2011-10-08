@@ -69,11 +69,21 @@ $ = jQuery;
 		
 	this.imageCache = [];
 	this.IMG_LINKS = {
-		unsel: [
-			'images/menu_p1.png', 'images/menu_p2.png', 'images/menu_p3.png', 'images/menu_n1.png', 'images/menu_n2.png', 'images/menu_n3.png'
+		unsel:[
+		'images/menu/p1.png',
+		'images/menu/p2.png',
+		'images/menu/p3.png',
+		'images/menu/n1.png',
+		'images/menu/n2.png',
+		'images/menu/n3.png'
 		],
 		sel: [
-			'images/menu_p1h.png', 'images/menu_p2h.png', 'images/menu_p3h.png', 'images/menu_n1h.png', 'images/menu_n2h.png', 'images/menu_n3h.png'
+		'images/menu/p1h.png',
+		'images/menu/p2h.png',
+		'images/menu/p3h.png',
+		'images/menu/n1h.png',
+		'images/menu/n2h.png',
+		'images/menu/n3h.png'
 		]
 	};
 })();
@@ -328,7 +338,7 @@ $ = jQuery;
 		},
 
 
-		loadNews: function(){
+		updateNews: function(){
 			//TODO
 		},
 		

@@ -90,7 +90,6 @@ header .logo {
   font-size: 14px;
 }
 /*------- menu buttons--------*/
-.menuItemBlock,
 .menuButton {
   width: 280px;
   height: 140px;
@@ -99,40 +98,40 @@ header .logo {
   cursor: pointer;
 }
 .crewButton {
-  background-image: url("/images/menu_p1.png");
+  background-image: url("/images/menu/p1.png");
 }
 .crewButton:hover {
-  background-image: url("/images/menu_p1h.png");
+  background-image: url("/images/menu/p1h.png");
 }
 .roamsButton {
-  background-image: url("/images/menu_p2.png");
+  background-image: url("/images/menu/p2.png");
 }
 .roamsButton:hover {
-  background-image: url("/images/menu_p2h.png");
+  background-image: url("/images/menu/p2h.png");
 }
 .rumorsButton {
-  background-image: url("/images/menu_p3.png");
+  background-image: url("/images/menu/p3.png");
 }
 .rumorsButton:hover {
-  background-image: url("/images/menu_p3h.png");
+  background-image: url("/images/menu/p3h.png");
 }
 .squadButton {
-  background-image: url("/images/menu_n1.png");
+  background-image: url("/images/menu/n1.png");
 }
 .squadButton:hover {
-  background-image: url("/images/menu_n1h.png");
+  background-image: url("/images/menu/n1h.png");
 }
 .missionsButton {
-  background-image: url("/images/menu_n2.png");
+  background-image: url("/images/menu/n2.png");
 }
 .missionsButton:hover {
-  background-image: url("/images/menu_n2h.png");
+  background-image: url("/images/menu/n2h.png");
 }
 .legendsButton {
-  background-image: url("/images/menu_n3.png");
+  background-image: url("/images/menu/n3.png");
 }
 .legendsButton:hover {
-  background-image: url("/images/menu_n3h.png");
+  background-image: url("/images/menu/n3h.png");
 }
 /*-------------- board content -------------*/
 .board {
@@ -144,7 +143,6 @@ header .logo {
   z-index: 2;
   position: relative;
   top: -554px;
-/*display none*/
   visibility: hidden;
 }
 .boardForm {
@@ -152,28 +150,6 @@ header .logo {
   margin: 0 auto;
   font-size: 14px;
   color: #fff;
-}
-.boardText {
-  width: 380px;
-  margin: 0 auto;
-  font-size: 14px;
-  color: #fff;
-  padding-top: 20px;
-}
-.loginForm {
-  padding-top: 100px;
-}
-.registForm {
-  padding-top: 20px;
-}
-.notification {
-  padding-top: 200px;
-  text-align: center;
-}
-.boardText span {
-  font-family: fantasy;
-  font-size: 18px;
-  text-align: center;
 }
 .boardForm span {
   display: block;
@@ -192,7 +168,7 @@ header .logo {
   font-size: 14px;
   border: 0;
   padding: 0 15px;
-  background: transparent url("/images/scroll_h1.png");
+  background: transparent url("/images/formfield.png");
 }
 .boardForm input[type*="button"],
 .boardForm input[type*="submit"] {
@@ -205,10 +181,27 @@ header .logo {
   border: 0 none;
   background: transparent url("/images/button_bg1.png");
 }
-.rulesImg {
-  width: 200px;
-  height: 200px;
-  background-image: url("/images/diagram.png");
+.loginForm {
+  padding-top: 100px;
+}
+.registForm {
+  padding-top: 20px;
+}
+.notification {
+  padding-top: 200px;
+  text-align: center;
+}
+.boardText {
+  width: 380px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: #fff;
+  padding-top: 20px;
+}
+.boardText span {
+  font-family: fantasy;
+  font-size: 18px;
+  text-align: center;
 }
 /*-------- cor/err icons styles ------*/
 .registIco {
@@ -227,6 +220,12 @@ header .logo {
   position: absolute;
   top: 72px;
   right: 27px;
+}
+/*-------- misc ---------*/
+.rulesImg {
+  width: 200px;
+  height: 200px;
+  background-image: url("/images/diagram.png");
 }
 /*-------- team page styles ------*/
 .teamBlock {
@@ -279,7 +278,7 @@ header .logo {
   margin: 0 auto;
 }
 .defAva {
-  background-image: url("/images/noplayer.png");
+  background-image: url("/images/avatars/noplayer.png");
 }
 .memberName {
   margin: 10px 0px;
