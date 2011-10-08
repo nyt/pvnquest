@@ -1,0 +1,36 @@
+div.adminPage
+
+	h1 *_* Administration Interface *_*
+	h3 No hamsters, eggplants, noobs, random pirates or ninjas, hackers, PhD's and velociraptors
+		br
+		|(if you fall in one of these categories, please leave IMMIDIATELY)
+
+	div.adminBlock
+		h2 Users registered:
+		table#users
+			tr
+				td FNAME
+				td LNAME
+				td UNAME
+				td EMAIL
+				td ACTIVE
+
+	div.adminBlock
+		h2 Mass e-mail send:
+		form#emailForm
+			input#emailHead(type='textfield')
+			br
+			textarea#emailBody(rows=10, cols=40)
+			br
+			input#emailSubmit(type='submit', value='Send')
+			
+	div.adminBlock
+		h2 Add news:
+		form#newsForm
+			input#newsHead(type='textfield')
+			br
+			textarea#newsBody(rows=10, cols=40)
+			br
+			input#newsSubmit(type='submit', value='Publish')
+
+
