@@ -129,17 +129,16 @@ $ = jQuery;
 			if(what=='hide')
 				state.$board.css('visibility', 'hidden');
 			else if(what=='other'){
-				console.log('other');
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board.png\')');
 			}else if(what=='pirates'){
-				console.log('pirates');
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board_p.png\')');
 			}else if(what=='ninjas'){
-				console.log('ninjas');
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board_n.png\')');
+			} else if(what=='toad'){
+				state.$toad.css('visibility', 'visible');
 			}
 		},
 		
@@ -398,6 +397,11 @@ function init(){
 	$('#registLink').click(function(){
 		utils.inflateBoard('registForm');
 		utils.showBoard('other');
+	});
+
+	//---- assign secret click handler
+	$('.toggleSecret').click(function(){
+		$('.secret').css('visibility','visible');
 	});
 	
 	//---- check for registration activation redirect

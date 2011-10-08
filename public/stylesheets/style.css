@@ -45,6 +45,12 @@ header .logo {
 .loginBlock a:hover {
   color: #cff;
 }
+.toggleSecret {
+  width: 10px;
+  height: 10px;
+  margin: 30px 50px;
+  float: left;
+}
 /*------- main part ---------*/
 .mainBlock {
   margin: 0 auto;
@@ -132,6 +138,20 @@ header .logo {
 }
 .legendsButton:hover {
   background-image: url("/images/menu/n3h.png");
+}
+/*-------------- secret ---------------*/
+.secret {
+  width: 640px;
+  height: 480px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-image: url("/images/hypnotoad.gif");
+  z-index: 3;
+  position: relative;
+  top: -1100px;
+  visibility: hidden;
+  text-align: center;
+  color: #fff;
 }
 /*-------------- board content -------------*/
 .board {
