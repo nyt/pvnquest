@@ -394,10 +394,12 @@ function init(){
 	
 	//---- assign login/register links handlers
 	$('#loginLink').click(function(){
+		utils.menuClick(state.selButton);
 		utils.inflateBoard('loginForm');
 		utils.showBoard('other');
 	});
 	$('#registLink').click(function(){
+		utils.menuClick(state.selButton);
 		utils.inflateBoard('registForm');
 		utils.showBoard('other');
 	});
