@@ -131,12 +131,15 @@ $ = jQuery;
 			else if(what=='other'){
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board.png\')');
+				state.$board.css('color', '#FFFFFF');
 			}else if(what=='pirates'){
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board_p.png\')');
+				state.$board.css('color','#000000');
 			}else if(what=='ninjas'){
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board_n.png\')');
+				state.$board.css('color','#FFFFFF');
 			} else if(what=='toad'){
 				state.$toad.css('visibility', 'visible');
 			}
