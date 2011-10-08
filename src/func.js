@@ -111,7 +111,7 @@ exports.checkUser = function(what, callback){
 	});
 };
 
-exports.registActivate = function(what, callback){
+exports.registActivate = function(what, data, callback){
 	var col = this.getCol('users');
 	col.update({verify:what, active:false}, {$set:{active:true}}, {upset:false, multi:false, safe:false}, function(err, items){
 		if(err){ 
@@ -123,7 +123,7 @@ exports.registActivate = function(what, callback){
 			if(err){
 				console.log('DB ERROR: ', err);
 				callback(false);
-				return;	
+				return;
 			}
 			//---- check the update status
 			if(error[0].n == 0){
@@ -131,6 +131,10 @@ exports.registActivate = function(what, callback){
 				callback(false);
 				return;
 			}
+			col.find({verify:what}).toArray(function(err, items){
+				data.uname=items[0].uname;
+				data.pass=items[0].pass;
+			});
 			console.log('User is activated');
 			callback(true);
 		});

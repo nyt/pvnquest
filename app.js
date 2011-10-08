@@ -46,9 +46,12 @@ app.get('/adminInterface', function(req, res){
 });
 
 app.get('/activate', function(req, res){
-	func.registActivate(req.param('h'), function(success){
+	var data = {};
+	func.registActivate(req.param('h'), data, function(success){
 		console.log('Activation succesful!');
-		res.cookie('activated', (success)?'yes':'no', {maxAge: 900000});
+		res.cookie('activated', (success)?'yes':'no', {maxAge: 90000});
+		res.cookie('uname', data.uname);
+		res.cookie('pass', data.pass);
 		res.redirect('home');
 	});
 });
@@ -59,7 +62,7 @@ app.post('/regist', function(req, res){
 	//console.log(req.body);
 	func.registUser(req.body, function(success){	
 		res.header('Content-Type', 'application/json');
-		res.json({success: success});		
+		res.json({success: success});
 	});
 });
 
