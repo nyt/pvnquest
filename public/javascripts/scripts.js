@@ -1,54 +1,72 @@
 $ = jQuery;
 
-/*
- *	statics
- */
+/* ------------------------------ Statics ------------------------------ */
+
 (function(){
-	this.LOGIN_FORM = '<form class="loginForm boardForm">\
-							<span>Login</span>\
-							<label for="lf_email">Email: </label><input type="text" id="lf_email"/>\
-							<label for="lf_pass">Password: </label><input type="password" id="lf_pass"/>\
-							<input type="submit" id="lf_login" value="Login"/>\
-							<input type="button" id="lf_cancel" value="Cancel"/>\
-					</form>';
-	this.REGIST_FORM = '<form class="registForm boardForm">\
-							<span>Registration</span>\
-							<label for="rf_fname">Your first name:</label><input type="text" id="rf_fname" maxlength=32 />\
-							<label for="rf_lname">Your last name:</label><input type="text" id="rf_lname" maxlength=32 />\
-							<label for="rf_uname">Choose a nickname:</label><input type="text" id="rf_uname" maxlength=32 />\
-							<label for="rf_email">Enter your e-mail:</label><input type="text" id="rf_email" maxlength=32 />\
-							<label for="rf_pass">Choose a password:</label><input type="password" id="rf_pass" maxlength=32 />\
-							<label for="rf_repass">Please, retype the password:</label><input type="password" id="rf_repass" maxlength=32 />\
-							<input type="submit" id="rf_regist" value="Register"/>\
-							<input type="button" id="rf_cancel" value="Cancel"/>\
-						</form>\
-						<div class="registIcons">\
-							<div id="i_fname" name="rf_fname" class="registIco"></div>\
-							<div id="i_lname" name="rf_lname" class="registIco"></div>\
-							<div id="i_uname" name="rf_uname" class="registIco"></div>\
-							<div id="i_email" name="rf_email" class="registIco"></div>\
-							<div id="i_pass" name="rf_pass" class="registIco"></div>\
-							<div id="i_repass" name="rf_repass" class="registIco"></div>\
-						</div>';
-	this.NOTIFICATION = '<div class="notification boardForm">\
-							<span id="msg"></span>\
-							<input type="submit" id="msg_ok" value="OK"/>\
-						</div>';
-	this.LOGGED_AS = 'Welcome, <span id="loggedUser"></span>!\
-					<a id="logoutLink" class="lbLink">Logout</a>';
-	this.BOARD_CONTENT =  '<div class="boardContent boardForm">\
-							<span id="caption"></span>\
-						 </div>';
-	this.TEAM_LI = '<li class="team_li">\
-						<div class="team_pic">
-							<img />
-						</div>
-						<div class="team_info">
-							<div class="team_name"></div>
-							<ul></ul>
-						</div>
-					</li>';
-	
+	this.LOGIN_FORM = 
+		'<form class="loginForm boardForm">\
+			<span>Login</span>\
+			<label for="lf_email">Email: </label><input type="text" id="lf_email"/>\
+			<label for="lf_pass">Password: </label><input type="password" id="lf_pass"/>\
+			<input type="submit" id="lf_login" value="Login"/>\
+			<input type="button" id="lf_cancel" value="Cancel"/>\
+		</form>';
+	this.REGIST_FORM = 
+		'<form class="registForm boardForm">\
+			<span>Registration</span>\
+			<label for="rf_fname">Your first name:</label><input type="text" id="rf_fname" maxlength=32 />\
+			<label for="rf_lname">Your last name:</label><input type="text" id="rf_lname" maxlength=32 />\
+			<label for="rf_uname">Choose a nickname:</label><input type="text" id="rf_uname" maxlength=32 />\
+			<label for="rf_email">Enter your e-mail:</label><input type="text" id="rf_email" maxlength=32 />\
+			<label for="rf_pass">Choose a password:</label><input type="password" id="rf_pass" maxlength=32 />\
+			<label for="rf_repass">Please, retype the password:</label><input type="password" id="rf_repass" maxlength=32 />\
+			<input type="submit" id="rf_regist" value="Register"/>\
+			<input type="button" id="rf_cancel" value="Cancel"/>\
+		</form>\
+		<div class="registIcons">\
+			<div id="i_fname" name="rf_fname" class="registIco"></div>\
+			<div id="i_lname" name="rf_lname" class="registIco"></div>\
+			<div id="i_uname" name="rf_uname" class="registIco"></div>\
+			<div id="i_email" name="rf_email" class="registIco"></div>\
+			<div id="i_pass" name="rf_pass" class="registIco"></div>\
+			<div id="i_repass" name="rf_repass" class="registIco"></div>\
+		</div>';
+	this.NOTIFICATION = 
+		'<div class="notification boardForm">\
+			<span id="msg"></span>\
+			<input type="submit" id="msg_ok" value="OK"/>\
+		</div>';
+	this.LOGGED_AS =  
+		'Welcome, <span id="loggedUser"></span>!\
+		<a id="logoutLink" class="lbLink">Logout</a>';
+	this.BOARD_CONTENT = 
+		'<div class="boardContent boardForm">\
+				<span id="caption"></span>\
+		 </div>';
+	this.TEAM_LI =
+		'<li class="team_li">\
+			<div class="team_pic">\
+				<img \\>\
+			</div>\
+			<div class="team_info">\
+				<div class="team_name"></div>\
+				<ul></ul>\
+			</div>\
+		</li>';
+	this.ROAMS =
+		'<div class="boardText">\
+			<div>Unfortunately, there are no new quests to roam in nearby tavern...</div>\
+		</div>'
+	this.MISSIONS =
+		'<div class="boardText">\
+			<div>Unfortunately, mission board is empty now...</div>\
+		</div>'
+	this.RULES =
+		'<div class="boardText">\
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>\
+			<div class="rulesImg"></div>\
+		</div>'
+		
 	this.imageCache = [];
 	this.IMG_LINKS = {
 		unsel: [
@@ -60,13 +78,12 @@ $ = jQuery;
 	};
 })();
 
-/*
- *	main stuff
- */
+/* ------------------------------ Main Stuff ------------------------------ */
+
 (function(){
 	this.doc = document;
 	
-	this.utils={
+	this.utils = {
 		add:function(tag, parent){
 			var el = doc.createElement(tag);
 			if(parent && parent!==undefined) parent.appendChild(el);
@@ -86,26 +103,31 @@ $ = jQuery;
 			}
 			if(sel==index){
 				sel = -1;
-				utils.showBoard(0);
+				utils.showBoard('hide');
 			}
-			else {
+			else{
 				sel = index;
 				$(state.$buttons[sel]).css('background-image', 'url(\'' + IMG_LINKS.sel[sel] + '\')');
-				utils.showBoard((index<3)?1:2);
-				inflateBoard(index);
-				boardContent(index);
+				utils.showBoard((index<3)?'pirates':'ninjas');
+				utils.inflateBoard(index);
+				utils.boardContent(index);
 			}
 			state.selButton = sel;
 		},
 		
 		showBoard: function(what){
-			if(what==0)
+			if(what=='hide')
 				state.$board.css('visibility', 'hidden');
-			else if(what==1){
+			else if(what=='other'){
+				console.log('other');
+				state.$board.css('visibility', 'visible');
+				state.$board.css('background-image', 'url(\'images/board.png\')');
+			}else if(what=='pirates'){
+				console.log('pirates');
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board_p.png\')');
-			}
-			else if(what==2){
+			}else if(what=='ninjas'){
+				console.log('ninjas');
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board_n.png\')');
 			}
@@ -116,27 +138,29 @@ $ = jQuery;
 				state.$board.html(LOGIN_FORM);
 				$('#lf_login').unbind('click').click(utils.loginHandler);
 				$('#lf_cancel').unbind('click').click(function(){
-					utils.showBoard(0);
+					utils.showBoard('hide');
 				});
 			}else if(what=='registForm'){
 				state.$board.html(REGIST_FORM);
 				$('#rf_regist').unbind('click').click(utils.registHandler);
 				$('#rf_cancel').unbind('click').click(function(){
-					utils.showBoard(0);
+					utils.showBoard('hide');
 				});
-				$('.registForm input[type*="text"], .registForm input[type*="password"]').unbind('blur').bind('blur', utils.registCheck);
+				$('.registForm input[type*="text"], .registForm input[type*="password"], .registForm input[type*="email"]').unbind('blur').bind('blur', utils.registCheck);
 			}else if(what=='notification'){
 				state.$board.html(NOTIFICATION);
 				$('#msg_ok').unbind('click').click(function(){
-					utils.showBoard(0);
+					utils.showBoard('hide');
 					return false;
 				});
 			}else if(what==0 || what==3){
 				state.$board.html(BOARD_CONTENT);
-			}else if(what==1 || what==4){
-				
+			}else if(what==1){
+				state.$board.html(ROAMS);
+			}else if(what==4){
+				state.$board.html(MISSIONS);
 			}else if(what==2 || what==5){
-				
+				state.$board.html(RULES);
 			}
 		},
 		
@@ -162,13 +186,13 @@ $ = jQuery;
 								$team_mem.html(mem.fname + ' "' + mem.uname + '" ' + mem.lname);
 								$team_mems.append($team_mem);
 							}
-							var $teamList.append($teamli);
+							$teamList.append($teamli);
 						}
 					}
 				});
 				
 				$boardContent.append($teamList);
-				if(loggedCheck){
+				if(utils.loggedCheck()){
 					var $createNew = $(doc.createElement('div'));
 					$createNew.addClass('createNewTeam createNewCrew');
 				}
@@ -176,12 +200,11 @@ $ = jQuery;
 		},
 		
 		getListOfTeams: function(which, callback){
-			sendMessage('listTeams', {side:which}, callback);
+			utils.sendMessage('listTeams', {side:which}, callback);
 		},
 		
 		loginHandler: function(){
-			console.log('HREN');
-			var data={};			
+			var data={};
 			data.email = $('#lf_email').val();
 			data.pass = $('#lf_pass').val();
 			if(data.email.length==0 || data.pass.length==0){
@@ -193,22 +216,21 @@ $ = jQuery;
 				if(data.success) {
 					$('#msg').html('Login succesful.');
 					utils.loggedUser();
-				}
-				else
+				}else
 					$('#msg').html('Login failed.');
 			});
 			return false;
 		},
 		
 		registHandler: function(){
-			if(state.registChecks!=6){
+			if(!utils.registAllCor()){
 				alert('Please fill out all the fields correctly.');
 				return false;
 			}
-			var data={};	
+			var data={};
 			data.uname = $('#rf_uname').val();
 			data.fname = $('#rf_fname').val();
-			data.lname = $('#rf_lname').val();	
+			data.lname = $('#rf_lname').val();
 			data.email = $('#rf_email').val();
 			data.pass = $('#rf_pass').val();
 			utils.sendMessage('regist', data, function(data, status){
@@ -222,46 +244,49 @@ $ = jQuery;
 		},
 		
 		registCheck: function(){
-			var _rc = utils._registCheck;
 			var imgObj=$('[name*='+this.id+']');
 			imgObj.removeClass();
-			if(this.id=='rf_email'){
+			if(this.id=='rf_email') {
 				if( (/.*@.*\..*/gi).test(this.value)){
 					utils.sendMessage('registCheck', {email:this.value}, function(res){
-						if(res.success) _rc(imgObj, true);
-						else _rc(imgObj);
+						if(!res.success)
+							imgObj.addClass('registIco errIco');
+						else
+							imgObj.addClass('registIco corIco');
+					});
+				}else
+					imgObj.addClass('registIco errIco');
+			}else if(this.id=='rf_uname'){
+				if(this.value=='')
+					imgObj.addClass('registIco errIco');
+				else {
+					utils.sendMessage('registCheck', {uname:this.value}, function(res){
+						if(!res.success)
+							imgObj.addClass('registIco errIco');
+						else
+							imgObj.addClass('registIco corIco');
 					});
 				}
-				else _rc(imgObj);
-			} else if(this.id=='rf_repass'){
+			}else if(this.id=='rf_repass'){
 				if($('#rf_pass').val()==$('#rf_repass').val() && $('#rf_repass').val()!='')
-					_rc(imgObj, true);
-				else _rc(imgObj);
-			} else if(this.id=='rf_lname' || this.id=='rf_fname') {
-				var _fname = $('#rf_fname').val();
-				var _lname = $('#rf_lname').val();
-				if(_fname.length!=0 && _lname.length!=0)
-					utils.sendMessage('registCheck', {fname:_fname, lname:_lname}, function(res){
-						if(res.success) _rc(imgObj, true);
-						else _rc(imgObj);
-					});
-				else if( (_fname.length!=0 && this.id=='rf_fname') || 
-						 (_lname.length!=0 && this.id=='rf_lname')) _rc(imgObj, true);
-				else _rc(imgObj);
-			} else{ 	
-				if(this.value!='') _rc(imgObj, true);	
-				else _rc(imgObj);
+					imgObj.addClass('registIco corIco');
+				else
+					imgObj.addClass('registIco errIco');
+			}else{
+				if(this.value=='')
+					imgObj.addClass('registIco errIco');
+				else
+					imgObj.addClass('registIco corIco');
 			}
 		},
 		
-		_registCheck:function(imgObj, plus){
-			imgObj.addClass('registIco '+ ((plus)?'corIco':'errIco') );
-			console.log(state.registChecks);
-			if(plus){
-				if(state.registChecks>=0 && state.registChecks<6 ) state.registChecks++;
-			}else{
-				if(state.registChecks>0 && state.registChecks<=6) state.registChecks--;
-			}
+		registAllCor: function(){
+			return ($('#i_fname').hasClass('corIco') &&
+				$('#i_lname').hasClass('corIco') &&
+				$('#i_uname').hasClass('corIco') &&
+				$('#i_email').hasClass('corIco') &&
+				$('#i_pass').hasClass('corIco') &&
+				$('#i_repass').hasClass('corIco'));
 		},
 		
 		registActivate: function(){
@@ -270,13 +295,12 @@ $ = jQuery;
 				$.cookie('activated', null);
 				utils.inflateBoard('notification');
 				$('#msg').html('Your account was activated!');
-				utils.showBoard(1);
-			}
-			else if($.cookie('activated') == 'no'){
+				utils.showBoard('other');
+			}else if($.cookie('activated') == 'no'){
 				$.cookie('activated', null);
 				utils.inflateBoard('notification');
 				$('#msg').html('Wrong activation code!');
-				utils.showBoard(1);
+				utils.showBoard('other');
 			}
 		},
 		
@@ -289,6 +313,7 @@ $ = jQuery;
 		loggedCheck:function(){
 			return ($.cookie('uname') !== undefined);
 		},
+ 
 		loggedUser: function(){
 			var uname = $.cookie('uname');
 			if(uname){
@@ -298,13 +323,16 @@ $ = jQuery;
 				$('#logoutLink').unbind('click').click(utils.logoutHandler);
 				
 				/* ------- Change content of crew/squads block -------- */
-					
+				//TODO
 			}
 		},
+
+
+		loadNews: function(){
+			//TODO
+		},
 		
-		/*
-		*	callback(data, status)
-		*/ 
+		// ---- callback(data, status)
 		sendMessage: function(type, data, callback){
 			$.ajax({
 				url: type,
@@ -319,12 +347,9 @@ $ = jQuery;
 		$board: null,
 		$buttons: null,
 		selButton: -1,
-		registChecks: 0
 	};
 
-	/* 
-	 * ---- preinit operations
-	 */
+	// ---- preinit operations
 	$.each(IMG_LINKS.sel, function(index, val){
 		var img = new Image();
 		img.src = val;
@@ -333,11 +358,10 @@ $ = jQuery;
 })();
 
 
-/*
- *	initialization operations
- */
+/* ------------------------------ Initialization operations ------------------------------ */
+
 function init(){
-	//--- assign states
+	//---- assign states
 	state.$board = $('.board');
 	state.$buttons = $('.menuButton');
 
@@ -359,19 +383,21 @@ function init(){
 	//---- assign login/register links handlers
 	$('#loginLink').click(function(){
 		utils.inflateBoard('loginForm');
-		utils.showBoard(1);
+		utils.showBoard('other');
 	});
 	$('#registLink').click(function(){
 		utils.inflateBoard('registForm');
-		utils.showBoard(1);
+		utils.showBoard('other');
 	});
 	
-	//--- check for registration activation redirect
+	//---- check for registration activation redirect
 	utils.registActivate();
 	
-	//--- check if user is logged
+	//---- check if user is logged
 	utils.loggedUser();
-	
+
+	//---- load news
+	utils.updateNews();
 	
 }
 $(document).ready(init);

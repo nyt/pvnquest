@@ -7,7 +7,7 @@ var mailer = require('nodemailer');
 var db = mongo.db('localhost/pvnquest');
 
 mailer.SMTP = {
-    host: 'smtp.gmail.com',
+	host: 'smtp.gmail.com',
 	use_authentication: true,
 	user: 'bot.pvnquest@gmail.com',
 	pass: 'twocamelsinthetinycar'
@@ -20,7 +20,6 @@ exports.getCol = function(col){
 	return db.createCollection(col);
 };
 
-//---- 
 exports.registUser = function(data, callback){
 	var col = this.getCol('users');
 	data.pass = hashlib.md5(data.pass);
@@ -35,16 +34,16 @@ exports.registUser = function(data, callback){
 		console.log('Database entry created');
 		mailer.send_mail(
 			{
-		        sender: 'bot.pvnquest@gmail.com',
-		        to:'trldvlalive3@gmail.com',
-		        subject:'PVN Account Activation',
-		        body:'Someone has used this e-mail for registration on pvnquest.tk\n\
+				sender: 'bot.pvnquest@gmail.com',
+				to: data.email,
+				subject:'Pirates vs Ninjas Quest account activation',
+				body:'Someone has used this e-mail for registration on pvnquest.tk\n\
 					If it was you, please click on the link below to activate your account\n\
 					http://pvnquest.tk/activate?h='+data.verify+'\n\n\
 					Pirates vs Ninjas Quest Bot'
-		    }, 
+			},
 			function(error, success){
-		        if(error){
+				if(error){
 					console.log('SEND_MAIL ERROR: ', error);
 					callback(false);
 					return;
@@ -52,7 +51,7 @@ exports.registUser = function(data, callback){
 				console.log('Message ' + (success ? 'sent' : 'failed'));
 				callback(true);
 			}
-		);			
+		);
 	});
 };
 
@@ -85,8 +84,7 @@ exports.registCheck = function(what, callback){
 		if(utils.isArr(items) && items.length>0){
 			console.log('Regist check fails. Requested items are not avalible');
 			callback(false);
-		}
-		else{
+		}else{
 			console.log('Regist check success. Requested items are avalible');
 			callback(true);
 		}
@@ -97,10 +95,9 @@ exports.hasTeamCheck = function(what, callback){
 	var col = this.getCol('users');
 	what.inTeam=
 	col.find(what).toArray(function(err, items){
-	
+		//TODO
 	});
 };
-
 
 exports.checkUser = function(what, callback){
 	var col = this.getCol('users');
@@ -139,7 +136,7 @@ exports.registActivate = function(what, callback){
 		});
 	});
 }
-
+/*
 exports.getUsers = function(){
 	var col = this.getCol('users');
 	col.find().toArray(function(err, items){
@@ -153,3 +150,4 @@ exports.getUser = function(email){
 		console.log(items);
 	});
 };
+*/
