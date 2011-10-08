@@ -41,6 +41,10 @@ app.get('/team', function(req, res){
 	res.render('team');
 });
 
+app.get('/adminInterface', function(req, res){
+	res.render('admin');
+});
+
 app.get('/activate', function(req, res){
 	func.registActivate(req.param('h'), function(success){
 		console.log('Activation succesful!');
@@ -85,6 +89,7 @@ app.get('/listTeams', function(req, res){
 });
 
 //----------- XHR CHECKS
+
 app.get('/hasTeamCheck', function(req, res){
 	var body = {};
 	body.uname = res.cookie('uname');
