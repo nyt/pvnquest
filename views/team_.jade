@@ -1,0 +1,68 @@
+div
+
+	div.teamBlock
+
+		div.titleBlock
+			input(type="text", value="Salty Sea Dogs")
+
+		div.infoBlock
+			div.caption Story:
+			div.teamIinfo 
+				textarea Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+		div.divider
+
+		div.infoBlock
+			div.caption Quests:
+			div This team hasn't completed any quests.
+
+		div.divider
+
+		div.infoBlock
+			div.caption Inventory:
+			div This team has empty inventory.
+
+		div.divider
+
+		div.membersBlock
+			div.memberCol
+				div.memberAvatar
+					button.arrowl
+					img(src="/images/avatars/noplayer.png")
+					button.arrowr
+				div.memberName Jack
+				div.playerName 
+					span.underlined Player:
+					div.bold Oleg Trylis
+				div.specName 
+					span.underlined Specialization:
+					select#pf_spec
+						option OFFENCE
+						option DEFENCE
+						option SUPPORT
+				div.infoText 
+					span.underlined Info:
+					textarea.infoTA Various information...
+
+			div.memberCol
+				div.memberAvatar
+				div.memberName Player 2
+				div.playerName 
+					span.underlined Player:
+					span.bold
+						select#tf_player2
+							option Hren Hrenovich
+							option Bla Bla-blas
+					
+			div.memberCol
+				div.memberAvatar
+				div.memberName Player 3
+				div.playerName
+					span.underlined Player:
+					select#tf_player3
+						option Hren Hrenovich
+						option Bla Bla-blas
+		div.controls
+			- if ( viewerInTeam )
+				button Edit
+				button Delete

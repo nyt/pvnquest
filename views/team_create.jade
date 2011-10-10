@@ -1,0 +1,74 @@
+div
+
+	div.teamBlock
+
+		div.titleBlock
+			input(type = "text")
+
+		div.infoBlock
+			div.caption Story:
+			div.teamInfo 
+				textarea
+
+		div.divider
+
+		div.infoBlock
+			div.caption Quests:
+			div No quests right now. Sorry, folks.
+
+		div.divider
+
+		div.infoBlock
+			div.caption Inventory:
+			div No iventory for now. Sorry again, folks.
+
+		div.divider
+
+		div.membersBlock
+			div#p0.memberCol
+				div.memberAvatar
+					button.arrowl
+					img(src="/images/avatars/noplayer.png", style='float:left')
+					button.arrowr
+				div.memberName= creator.uname
+				div.playerName 
+					span.underlined Player:
+					span.pName= (creator.fname + ' ' + creator.lname)
+				div.specName 
+					span.underlined Specialization:
+					span.pSpec
+						select
+							option OFFENCE
+							option DEFENCE
+							option SUPPORT
+				div.infoText 
+					span.underlined Info:
+					span.pInfo
+						textarea
+
+			div#p1.memberCol
+				div.memberAvatar
+					img(src="/images/avatars/noplayer.png")
+				div.memberName Player 2
+				div.playerName 
+					span.underlined Player:
+					span.pName
+						select
+							- for ( var i=0; i<users.length; i++ )
+								- var n = users[i].fname + ' ' + users[i	].lname 
+								option(value = n)= n	
+					
+			div#p2.memberCol
+				div.memberAvatar
+					img(src="/images/avatars/noplayer.png")
+				div.memberName Player 3
+				div.playerName
+					span.underlined Player:
+					span.pName
+						select
+							- for ( var i=0; i<users.length; i++ )
+								- var n = users[i].fname + ' ' + users[i	].lname 
+								option(value = n)= n
+		div.controls
+			button#create Create
+			button#cancel Cancel

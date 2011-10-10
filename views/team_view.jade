@@ -1,0 +1,70 @@
+div
+
+	div.teamBlock
+
+		div.titleBlock #{name}
+
+		div.infoBlock
+			div.caption Story:
+			div.teamInfo #{info}
+
+		div.divider
+
+		div.infoBlock
+			div.caption Quests:
+			div No quests right now. Sorry, folks.
+
+		div.divider
+
+		div.infoBlock
+			div.caption Inventory:
+			div No iventory for now. Sorry again, folks.
+
+		div.divider
+
+		div.membersBlock
+			div#p0.memberCol
+				div.memberAvatar
+					img(src = players[0].ava)
+				div.memberName #{players[0].uname}
+				div.playerName 
+					span.underlined Player:
+					span.pName #{players[0].fname} #{players[0].lname}
+				div.specName 
+					span.underlined Specialization:
+					span.pSpec #{players[0].spec}
+				div.infoText 
+					span.underlined Info:
+					span.pInfo #{players[0].info}
+
+			div#p1.memberCol
+				div.memberAvatar
+					img(src = players[1].ava)
+				div.memberName #{players[1].uname}
+				div.playerName 
+					span.underlined Player:
+					span.pName #{players[1].fname} #{players[1].lname}
+				div.specName 
+					span.underlined Specialization:
+					span.pSpec #{players[1].spec}
+				div.infoText 
+					span.underlined Info:
+					span.pInfo #{players[1].info}
+
+			div#p2.memberCol
+				div.memberAvatar
+					img(src = players[2].ava)
+				div.memberName #{players[2].uname}
+				div.playerName 
+					span.underlined Player:
+					span.pName #{players[2].fname} #{players[2].lname}
+				div.specName 
+					span.underlined Specialization:
+					span.pSpec #{players[2].spec}
+				div.infoText 
+					span.underlined Info:
+					span.pInfo #{players[2].info}
+		div.controls
+			- if ( viewerInTeam )
+				button#edit Edit
+				button#delete Delete

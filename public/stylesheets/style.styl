@@ -95,6 +95,7 @@ header .logo
 .newsBody
 	color #330000
 	font-size 14px
+	font-family sans-serif
 
 /*------- menu buttons--------*/
 
@@ -162,6 +163,7 @@ header .logo
 	position relative
 	top -554px
 	visibility hidden
+	font-family sans-serif
 
 .boardForm
 	width 300px
@@ -186,7 +188,7 @@ header .logo
 	padding 0 15px
 	background transparent url('/images/formfield.png')
 
-.boardForm input[type*="button"], .boardForm input[type*="submit"]
+.boardForm input[type*="button"], .boardForm input[type*="submit"], .boardForm button
 	width 80px
 	height 30px
 	margin 5px 32px 0
@@ -194,6 +196,39 @@ header .logo
 	font-family fantasy
 	color white
 	border 0 none
+	background transparent url('/images/button_bg1.png')
+	
+.boardForm button.center
+	margin 50px auto 0
+	display block
+	
+button.createNewSquad, button.createNewCrew
+	width 120px
+	height 30px
+	display block
+	margin 20px auto 0
+	font-size 14px
+	font-family fantasy
+	color white
+	border 0 none
+	background transparent url('/images/button_bg1.png')
+
+.boardContent
+	width 350px
+	padding-top 30px
+.boardContent ul
+	padding 0
+	margin 20px 0 0 0
+
+		
+.boardText input[type*="button"]
+	width 80px
+	height 30px
+	margin 5px 5px
+	font-size 14px
+	font-family fantasy
+	border 0 none
+	color #FFFFFF
 	background transparent url('/images/button_bg1.png')
 
 .loginForm
@@ -248,7 +283,7 @@ header .logo
 	background-image url('/images/team_back.png')
 	overflow hidden
 
-.heading
+.caption
 	margin 5px
 	padding-left 20px
 	font-size 24px
@@ -258,11 +293,24 @@ header .logo
 	text-align center
 	font-size 36px
 	font-family fantasy
+	
+.titleBlock input
+	font-size 32px
+	font-family fantasy
+	height 38px
+	text-align center
 
 .infoBlock
 	margin 5px
 	text-align left
 	font-size 16px
+
+.infoBlock textarea
+	font-size 16px
+	font-family sans-serif
+	width 630px
+	height 140px
+	resize none
 
 .divider
 	margin 15px auto
@@ -285,6 +333,23 @@ header .logo
 	text-align center
 
 .memberAvatar
+	width 154px
+	height 120px
+	margin 0 auto
+	
+.memberAvatar .arrowl, .memberAvatar .arrowr
+	float left
+	margin-top 45px
+	width 17px
+	height 30px
+	cursor pointer
+	border 0 none
+.memberAvatar .arrowr	
+	background transparent url("/images/arrowr.png")
+.memberAvatar .arrowl	
+	background transparent url("/images/arrowl.png")
+.memberAvatar img
+	display block
 	width 120px
 	height 120px
 	margin 0 auto
@@ -302,8 +367,41 @@ header .logo
 span.underlined
 	text-decoration underline
 
-span.bold
+.pName .pSpec
 	font-weight bold
+
+.pSpec select
+	font-size 14px
+	font-family sans-serif
+
+.pInfo textarea
+	font-size 14px
+	font-family sans-serif
+	width 200px
+	height 100px
+	resize none
+	
+.controls
+	float right
+.controls button
+	width 80px
+	height 30px
+	margin 10px 10px
+	font-size 14px
+	font-family fantasy
+	border 0 none
+	color #FFFFFF
+	background transparent url('/images/button_bg1.png')
+
+.fieldErr
+	box-shadow 0 0 4px 5px rgba(255,0,0,0.8)
+    -moz-box-shadow 0 0 4px 5px rgba(255,0,0,0.8)
+    -webkit-box-shadow 0 0 4px 5px rgba(255,0,0,0.8)
+/*
+.fieldCorrect
+	box-shadow 0 0 4px 5px rgba(0,255,0,0.8)
+    -moz-box-shadow 0 0 4px 5px rgba(0,255,0,0.8)
+    -webkit-box-shadow 0 0 4px 5px rgba(0,255,0,0.8)*/
 
 /*---------- Admin page styles ----------*/
 

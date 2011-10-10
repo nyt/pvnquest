@@ -1,0 +1,25 @@
+div.mainBody.hb
+
+	header.hb
+		div.toggleSecret
+		div.logo.hb
+		div.loginBlock
+
+	div.mainBlock.hb
+
+		div.columnBlock.hb(style="height:600px")
+
+		div.board(style="visibility:visible")
+			div.boardForm
+				- if (error != null)
+					span(style="padding-top:100px")= error
+					- if (advise)
+						span= advise
+				- else  	
+					span(style="padding-top:100px") Server error occured. 
+					span We apologize for incovenience, please, try again. 
+				button.center Back
+		div.secret
+			div Congratulations! You are now hypnotoadized!
+
+	footer.hb

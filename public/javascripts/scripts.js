@@ -41,31 +41,23 @@ $ = jQuery;
 		<a id="logoutLink" class="lbLink">Logout</a>';
 	this.BOARD_CONTENT = 
 		'<div class="boardContent boardForm">\
-				<span id="caption"></span>\
+				<span id="boardCaption"></span>\
 		 </div>';
 	this.TEAM_LI =
 		'<li class="team_li">\
 			<div class="team_pic">\
-				<img \\>\
+				<img />\
 			</div>\
 			<div class="team_info">\
 				<div class="team_name"></div>\
 				<ul></ul>\
 			</div>\
 		</li>';
-	this.ROAMS =
-		'<div class="boardText">\
-			<div>Unfortunately, there are no new quests to roam in nearby tavern...</div>\
-		</div>'
-	this.MISSIONS =
-		'<div class="boardText">\
-			<div>Unfortunately, mission board is empty now...</div>\
-		</div>'
-	this.RULES =
-		'<div class="boardText">\
-			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>\
-			<div class="rulesImg"></div>\
-		</div>'
+	this.ROAMS = '<div>Unfortunately, there are no new quests to roam in nearby tavern...</div>';
+	this.MISSIONS = '<div>Unfortunately, mission board is empty now...</div>';
+	this.RULES = 
+		'<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>\
+		<div class="rulesImg"></div>';
 		
 	this.imageCache = [];
 	this.IMG_LINKS = {
@@ -178,18 +170,21 @@ $ = jQuery;
 		
 		boardContent: function(what){
 			var $boardContent = $('.boardContent');
+			var $boardCaption = $('#boardCaption');
+			
 			if(what==0 || what==3){
+				$boardCaption.html((what==0)?'Crews':'Squads');
+				
 				var $teamList = $(doc.createElement('ul'));
 				$teamList.addClass('teamList');
-				
 				//---- get list of teams
-				utils.getListOfTeams( (what==0)?'pirates':'ninjas', function(res){
+				utils.getListOfTeams( (what==0)?'pirate':'ninja', function(res){
 					if(res.success){
 						for(var i=0; i<res.list.length; i++){
 							var team = res.list[i];
 							
 							var $teamli = $(TEAM_LI);
-							$('.team_pic img').attr('src', team.img);
+							$('.team_pic img').attr('src', '/images/defteam.png');
 							$('.team_name').html(team.name);
 							var $team_mems = $('.team_info ul');
 							for(var j=0; j<3; j++){
@@ -200,13 +195,22 @@ $ = jQuery;
 							}
 							$teamList.append($teamli);
 						}
+					}else{
+						$teamList.html('The are currently no crews in this tavern');
 					}
 				});
 				
 				$boardContent.append($teamList);
 				if(utils.loggedCheck()){
-					var $createNew = $(doc.createElement('div'));
-					$createNew.addClass('createNewTeam createNewCrew');
+					var $createNew = $(doc.createElement('button'));
+					$createNew.addClass((what==0)?'createNewCrew':'createNewSquad');
+					$createNew.html('Create new');
+					$boardContent.append($createNew);
+					$createNew.unbind('click').click(function(){
+						var l = ('/team?action=create&side=' + ((what==0)?'pirate':'ninja'));
+						console.log(l);
+						location.href = l;
+					});
 				}
 			}
 		},
@@ -317,21 +321,21 @@ $ = jQuery;
 		},
 		
 		logoutHandler: function(){
-			$.cookie('uname', null);
-			$.cookie('pass', null);
+			$.cookie('_pvna', null);
+			$.cookie('_pvnb', null);
 			location.href='/';
 		},
 		
 		loggedCheck:function(){
-			return ($.cookie('uname') !== undefined);
+			return ($.cookie('_pvna') != null && $.cookie('_pvna') != null);;
 		},
  
 		loggedUser: function(){
-			var uname = $.cookie('uname');
-			if(uname){
+			var email = $.cookie('_pvna');
+			if(email){
 				/* ------- Change content of login block -------- */
 				$('.loginBlock').html(LOGGED_AS);
-				$('#loggedUser').html(uname);
+				$('#loggedUser').html(email);
 				$('#logoutLink').unbind('click').click(utils.logoutHandler);
 				
 				/* ------- Change content of crew/squads block -------- */
@@ -349,7 +353,7 @@ $ = jQuery;
 			$.ajax({
 				url: type,
 				data: data,
-				type: 'POST',
+				type: (data)?'POST':'GET',
 				success: callback,	
 			});
 		}
