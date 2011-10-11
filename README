@@ -1,2 +1,33 @@
 PvN Quest repo 
-More info soon...
+
+DB Schema:
+
+	db.users = {
+		email : <string> (email, unique),
+		uname : <string> (nickname),
+		fname : <string> (first name),
+		lname : <string> (last name),
+		pass : <md5 string> (md5 hash of password),
+		active : <bool> (is user active?),
+		verify : <md5 string> (md5 verification string for activation),
+		[ team : <string> (team name to which user belongs), ]
+		[ side : <string> (one of {'pirate', 'ninja'}), ]
+	};
+	
+	db.teams = {
+		name : <string> (team name, unique),
+		info : <string> (team story),
+		side : <string> (one of {'pirate', 'ninja'}),
+		
+		mem : [
+			{
+				uid : <ObjectID> (_id of user)
+				uname : <string> (nickname),
+				fname : <string> (first name),
+				lname : <string> (last name),
+				spec : <string> (one of {'OFFENSE', 'DEFENSE', 'SUPPORT'}),
+				ava : <string> (url of the avatar image),
+				info : <string> (user story)
+			} (-> x3)
+		]
+	};
