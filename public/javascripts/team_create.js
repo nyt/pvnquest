@@ -75,51 +75,19 @@ $ = jQuery;
 			
 			//--- input field checkers
 			state.$tmName.bind('blur', function(){
-				$.Watermark.HideAll();
-				var name = this;
-				if(name.value.length!=0){
-					utils.sendMessage('teamNameCheck', {name:name.value}, function(res){
-						if(res.success) $(name).switchClasses('fieldErr', 'fieldCorrect');
-						else $(name).switchClasses('fieldCorrect', 'fieldErr');
-					});
-				}
-				else
-					$(name).switchClasses('fieldCorrect', 'fieldErr');
-				$.Watermark.ShowAll();
+				utils.teamNameCheck(state.$tmName);
 			});
 			state.$tmInfo.bind('blur', function(){
-				$.Watermark.HideAll();
-				if(this.value.length==0)
-					$(this).switchClasses('fieldCorrect', 'fieldErr');
-				else
-					$(this).switchClasses('fieldErr', 'fieldCorrect');
-				$.Watermark.ShowAll();
-			});
+				utils.infoFieldCheck(state.$tmInfo);
+			})
 			state.$p0_info.bind('blur', function(){
-				$.Watermark.HideAll();
-				if(this.value.length==0)
-					$(this).switchClasses('fieldCorrect', 'fieldErr');
-				else
-					$(this).switchClasses('fieldErr', 'fieldCorrect');
-				$.Watermark.ShowAll();
+				utils.infoFieldCheck(state.$p0_info);
 			});
 			state.$p1_name.bind('blur', function(){
-				if(!state.t1) state.t1=true;
-				if($(this).selectedVal() == state.$p2_name.selectedVal() && state.t2)
-					$(this).switchClasses('fieldCorrect', 'fieldErr');
-				else{
-					state.$p2_name.switchClasses('fieldErr', 'fieldCorrect');
-					$(this).switchClasses('fieldErr', 'fieldCorrect');
-				}
+				utils.othersCheck(state.$p1_name, state.$p2_name);
 			});
 			state.$p2_name.bind('blur', function(){
-				if(!state.t2) state.t2=true;
-				if($(this).selectedVal() == state.$p1_name.selectedVal() && state.t1)
-					$(this).switchClasses('fieldCorrect', 'fieldErr');
-				else{
-					state.$p1_name.switchClasses('fieldErr', 'fieldCorrect');
-					$(this).switchClasses('fieldErr', 'fieldCorrect');
-				}
+				utils.othersCheck(state.$p2_name, state.$p1_name);
 			});
 			
 			//---- do registration of a team on create	
@@ -131,8 +99,49 @@ $ = jQuery;
 			});	
 		},
 		
+		teamNameCheck : function($name){
+			$.Watermark.HideAll();
+			if($name.val().length!=0){
+				utils.sendMessage('teamNameCheck', {name:$name.val()}, function(res){
+					if(res.success) $name.switchClasses('fieldError', 'fieldCorrect');
+					else $name.switchClasses('fieldCorrect', 'fieldError');
+				});
+			}
+			else
+				$name.switchClasses('fieldCorrect', 'fieldError');
+			$.Watermark.ShowAll();
+		},
+		infoFieldCheck : function($field){
+			$.Watermark.HideAll();
+			if($field.val().length==0)
+				$field.switchClasses('fieldCorrect', 'fieldError');
+			else
+				$field.switchClasses('fieldError', 'fieldCorrect');
+			$.Watermark.ShowAll();
+		},
+		othersCheck : function($field1, $field2){
+			if($field1.selectedVal()!=$field2.selectedVal()){
+				if($field1.selectedVal().length>0)
+					$field1.switchClasses('fieldError', 'fieldCorrect');
+				else
+					$field1.switchClasses('fieldCorrect', 'fieldError');
+				if($field2.selectedVal().length>0)
+					$field2.switchClasses('fieldError', 'fieldCorrect');
+				else
+					$field2.switchClasses('fieldCorrect', 'fieldError');
+			}else{
+				$field1.switchClasses('fieldCorrect', 'fieldError');
+				$field2.switchClasses('fieldCorrect', 'fieldError');
+			}		
+		},
+		
 		createTeam : function(){
 			// --- check if no errors
+			utils.teamNameCheck(state.$tmName);
+			utils.infoFieldCheck(state.$tmInfo);
+			utils.infoFieldCheck(state.$p0_info);
+			utils.othersCheck(state.$p1_name, state.$p2_name);
+			
 			if( $('.fieldCorrect').length != 5){
 				alert('Some fields might be wrong. Please, check all fields again.')
 				return;
@@ -153,7 +162,13 @@ $ = jQuery;
 				state.$p2_name.selectedVal()
 			];
 			
-			utils.sendMessage('createTeam', obj);
+			utils.sendMessage('createTeam', obj, function(res){
+				if(res.success){
+					location.href = '/team?id='+res.data.id;
+				}else{
+					alert("Server error");
+				}
+			});
 		},
 		
 		getSelectors : function(){

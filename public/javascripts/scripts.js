@@ -184,9 +184,9 @@ $ = jQuery;
 							var team = res.list[i];
 							
 							var $teamli = $(TEAM_LI);
-							$('.team_pic img').attr('src', '/images/defteam.png');
-							$('.team_name').html(team.name);
-							var $team_mems = $('.team_info ul');
+							$teamli.find('.team_pic img').attr('src', '/images/defteam.png');
+							$teamli.find('.team_name').html(team.name);
+							var $team_mems = $teamli.find('.team_info ul');
 							for(var j=0; j<3; j++){
 								var mem = team.mem[j];
 								var $team_mem = $(doc.createElement('li'));
@@ -194,29 +194,40 @@ $ = jQuery;
 								$team_mems.append($team_mem);
 							}
 							$teamList.append($teamli);
+							$teamli.unbind('click').click(function(){
+								var l = '/team?id='+team._id;
+								location.href = l;
+							});
 						}
 					}else{
-						$teamList.html('The are currently no crews in this tavern');
+						$teamList.html((what==0)?'Currently no pirate crews are roaming this tavern.':'There are several ninja squads in this castle, but you don\'t see them. Coz they\'re ninjas.');
 					}
 				});
 				
 				$boardContent.append($teamList);
-				if(utils.loggedCheck()){
-					var $createNew = $(doc.createElement('button'));
-					$createNew.addClass((what==0)?'createNewCrew':'createNewSquad');
-					$createNew.html('Create new');
-					$boardContent.append($createNew);
-					$createNew.unbind('click').click(function(){
-						var l = ('/team?action=create&side=' + ((what==0)?'pirate':'ninja'));
-						console.log(l);
-						location.href = l;
-					});
-				}
+				utils.hasTeamCheck(function(res){
+					if(res.success){
+						$teamList.html($teamList.html() + (what==0)?'Go, gather your crew! Yarr!':'Wanna be in ninja squad yourself?')
+						
+						var $createNew = $(doc.createElement('button'));
+						$createNew.addClass((what==0)?'createNewCrew':'createNewSquad');
+						$createNew.html('Create new');
+						$boardContent.append($createNew);
+						$createNew.unbind('click').click(function(){
+							var l = ('/team?action=create&side=' + ((what==0)?'pirate':'ninja'));
+							console.log(l);
+							location.href = l;
+						});
+					}
+				});
 			}
 		},
 		
 		getListOfTeams: function(which, callback){
 			utils.sendMessage('listTeams', {side:which}, callback);
+		},
+		hasTeamCheck: function(callback){
+			utils.sendMessage('hasTeamCheck', null, callback);
 		},
 		
 		loginHandler: function(){
@@ -276,12 +287,7 @@ $ = jQuery;
 				if(this.value=='')
 					imgObj.addClass('registIco errIco');
 				else {
-					utils.sendMessage('registCheck', {uname:this.value}, function(res){
-						if(!res.success)
-							imgObj.addClass('registIco errIco');
-						else
-							imgObj.addClass('registIco corIco');
-					});
+					imgObj.addClass('registIco corIco');
 				}
 			}else if(this.id=='rf_repass'){
 				if($('#rf_pass').val()==$('#rf_repass').val() && $('#rf_repass').val()!='')
@@ -306,7 +312,7 @@ $ = jQuery;
 		},
 		
 		registActivate: function(){
-			console.log($.cookie('activated'));
+			//console.log($.cookie('activated'));
 			if($.cookie('activated') == 'yes'){
 				$.cookie('activated', null);
 				utils.inflateBoard('notification');
@@ -332,14 +338,20 @@ $ = jQuery;
  
 		loggedUser: function(){
 			var email = $.cookie('_pvna');
-			if(email){
-				/* ------- Change content of login block -------- */
-				$('.loginBlock').html(LOGGED_AS);
-				$('#loggedUser').html(email);
-				$('#logoutLink').unbind('click').click(utils.logoutHandler);
-				
-				/* ------- Change content of crew/squads block -------- */
-				//TODO
+			var pass = $.cookie('_pvnb');
+			
+			if(email && pass){
+				/* ------- Get uname from DB -------*/
+				utils.sendMessage('getUserInfo', {email:email, pass:pass}, function(res){
+					if(res.success) {
+						$('#loggedUser').html(res.data.uname);
+				}
+			})
+
+			$('.loginBlock').html(LOGGED_AS);
+			$('#logoutLink').unbind('click').click(utils.logoutHandler);
+							
+			/* ------- TODO Change content of crew/squads block -------- */
 			}
 		},
 

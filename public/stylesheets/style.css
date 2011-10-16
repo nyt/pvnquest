@@ -224,9 +224,38 @@ button.createNewCrew {
   width: 350px;
   padding-top: 30px;
 }
-.boardContent ul {
+.boardContent > ul {
   padding: 0;
   margin: 20px 0 0 0;
+}
+.boardContent > ul > li {
+  list-style-type: none;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.boardContent > ul > li:hover {
+  -moz-box-shadow: 0 0 2px 3px rgba(255,255,255,0.50);
+}
+-webkit-box-shadow 002px3pxrgba(255,
+255,
+255,
+0.5) {
+  box-shadow: 0 0 2px 3px rgba(255,255,255,0.50);
+}
+.team_li .team_pic {
+  float: left;
+}
+.team_li .team_info {
+  margin: 0 0 0 80px;
+}
+.team_li .team_info .team_name {
+  font-size: 16pt;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.team_li .team_info ul {
+  margin: 10px 0 0 15px;
+  padding: 0;
 }
 .boardText input[type*="button"] {
   width: 80px;
@@ -329,17 +358,13 @@ button.createNewCrew {
 }
 .membersBlock {
   width: 630px;
-  -moz-column-count: 3;
-  -moz-column-gap: 0px;
-  -webkit-column-count: 3;
-  -webkit-column-gap: 0px;
-  column-count: 3;
-  column-gap: 0px;
+  margin: 0 auto;
 }
 .memberCol {
   width: 210px;
   height: 400px;
   text-align: center;
+  float: left;
 }
 .memberAvatar {
   width: 154px;
@@ -380,7 +405,13 @@ button.createNewCrew {
 span.underlined {
   text-decoration: underline;
 }
-.pName .pSpec {
+.pName,
+.pSpec,
+.pInfo {
+  word-wrap: break-word;
+}
+.pName,
+.pSpec {
   font-weight: bold;
 }
 .pSpec select {
@@ -407,7 +438,7 @@ span.underlined {
   color: #fff;
   background: transparent url("/images/button_bg1.png");
 }
-.fieldErr {
+.fieldError {
   box-shadow: 0 0 4px 5px rgba(255,0,0,0.80);
 }
 -moz-box-shadow 004px5pxrgba(255,

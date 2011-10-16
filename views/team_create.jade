@@ -54,9 +54,9 @@ div
 					span.underlined Player:
 					span.pName
 						select
+							option
 							- for ( var i=0; i<users.length; i++ )
-								- var n = users[i].fname + ' ' + users[i	].lname 
-								option(value = n)= n	
+								option(value = users[i].email)= users[i].fname + ' ' + users[i].lname 
 					
 			div#p2.memberCol
 				div.memberAvatar
@@ -66,9 +66,9 @@ div
 					span.underlined Player:
 					span.pName
 						select
-							- for ( var i=0; i<users.length; i++ )
-								- var n = users[i].fname + ' ' + users[i	].lname 
-								option(value = n)= n
+							option
+							- for ( var i=0; i<users.length; i++ ) 
+								option(value = users[i].email)= users[i].fname + ' ' + users[i].lname 
 		div.controls
 			button#create Create
 			button#cancel Cancel

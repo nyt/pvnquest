@@ -15,10 +15,8 @@ function getSRand(num){
 	return Math.floor(Math.random()*3);
 };
 
-var UPDATE_OPT_MULTI = {upset:false, multi:true, safe:false};
-var UPDATE_OPT = {upset:false, multi:false, safe:false};
+var UPDATE_OPT = {upset:false, multi:true, safe:false};
 var DEF_ERR = {error: null, advise: null};
-var NOT_FOUND = {error: '404', advise: 'No page found'};
 
 mailer.SMTP = {
 	host: 'smtp.gmail.com',
@@ -154,7 +152,7 @@ exports.createTeam = function(data, callback){
 			_ids[i] = items[i]._id;
 		}
 		//--- update users docs with team name and side
-		users.update({_id: {$in : _ids}}, {$set:pSet}, UPDATE_OPT_MULTI, function(err){
+		users.update({_id: {$in : _ids}}, {$set:pSet}, UPDATE_OPT, function(err){
 			if(err){ 
 				console.log('DB ERROR: ', err);
 				callback(false, DEF_ERR);
@@ -205,7 +203,7 @@ exports.getTeam = function(data, callback){
 		}
 		if(!utils.isObj(item)){
 			console.log('No team found by the specified id');
-			callback(false, NOT_FOUND);
+			callback(false, {error: 'No team found by the specified id', advise: 'Please, login on the main page.'});
 			return;
 		}
 		
@@ -220,7 +218,7 @@ exports.getTeam = function(data, callback){
 			}
 			if(utils.isObj(item1)){
 				for(var i=0; i<team.mem.length; i++) 
-					if(team.mem[i].uid.toString() == item1._id.toString()){
+					if(team.mem[0].uid.toString() == item1._id.toString()){
 						team.viewerInTeam = true;
 						console.log('Viewer IS in request team');
 						break;
@@ -286,67 +284,51 @@ exports.editTeam = function(data, callback){
 	var teamUpdate = {};
 	teamUpdate.name = data.name;
 	teamUpdate.info = data.info;
+	teamUpdate['mem.0.ava'] = 
 	
 	users.findOne(data.usr, function(err, usrDoc){
-		if(err){ console.log('DB ERROR: ', err); callback(false); return;}
-		if(!utils.isObj(usrDoc)){
-			console.log('Auth failure');
+		if(err){
+			console.log('DB ERROR: ', err);
 			callback(false);
 			return;
 		}
+		if(!utils.isObj(usrDoc)){
+			console.log('Auth failure');
+			callback(false);
+		}
 		
-		var oldTeamName = usrDoc.team;
-		teams.findOne({name: oldTeamName}, function(err1, teamDoc){
-			if(err1){ console.log('DB ERROR: ', err1); callback(false); return;}
+		var oldTeamName = userDoc.team;
+		
+		teamUpdate['mem.0.ava'] = 
+		
+		teams.findAndModify({name: oldTeamName}, function(err, teamDoc){
+			if(err){
+				console.log('DB ERROR: ', err);
+				callback(false);
+				return;
+			}
 			if(!utils.isObj(teamDoc)){
 				console.log('No team, WTF!');
 				callback(false);
-				return;
 			}
 			
-			var usrPos = -1;
+			
+			
 			for(var i=0; i<teamDoc.mem.length; i++){
-				if(teamDoc.mem[i].uid.toString() == usrDoc._id.toString()){ usrPos=i; break;}
+				console.log(item1.mem[i].uid);
+				console.log(item._id);
+				if(item1.mem[i].uid.toString() == item._id.toString()){ 
+					result.pos = i;
+					break;
+				}
 			}
-			if(usrPos==-1){
-				console.log('No pos, WTF!');
+			if(result.pos==-1){
+				console.log('POLNIY DB ERROR:');
 				callback(false);
 				return;
 			}
 			
-			teamUpdate['mem.'+ usrPos +'.ava'] = data.editPlayer.ava;
-			teamUpdate['mem.'+ usrPos +'.info'] = data.editPlayer.info;
-			teamUpdate['mem.'+ usrPos +'.spec'] = data.editPlayer.spec;
-			teams.update({name: oldTeamName}, {$set: teamUpdate}, UPDATE_OPT, function(err2){
-				if(err2){ console.log('DB UPDATE ERROR: ', err2); callback(false); return;}
-				db.error(function(err3, error){
-					if(err3){ console.log('DB UPDATE ERROR: ', err3); callback(false); return;}
-					//---- check the update status
-					if(error[0].n == 0){
-						console.log('DB UPDATE ERROR!!!');
-						callback(false);
-						return;
-					}
-					
-					if(data.name!=oldTeamName){
-						users.update({team: oldTeamName}, {$set:{team: data.name}}, UPDATE_OPT_MULTI, function(err4){
-							if(err4){console.log('DB UPDATE ERROR (DB is definitely broken): ', err4); callback(false); return;}
-							db.error(function(err5, error){
-								if(err5){console.log('DB UPDATE ERROR (DB is definitely broken): ', err3); callback(false); return;}
-								//---- check the update status
-								if(error[0].n == 0){
-									console.log('DB UPDATE POLNIY ERROR (DB is definitely broken)');
-									callback(false);
-									return;
-								}
-								callback(true);
-							});
-						});
-					}else{
-						callback(true);
-					}
-				});
-			});	
+			callback(true, result);
 		});
 	});
 };
@@ -383,22 +365,6 @@ exports.listTeams = function(what, callback){
 		}
 		
 		callback(true, items);
-	});
-};
-
-exports.getTeamSide = function(what, callback){
-	var col = this.getCol('teams');
-	col.findById(what.teamId, function(err, item){
-		if(err){
-			console.log('DB ERROR: ', err);
-			callback(false);
-			return;
-		}
-		if(!utils.isObj(item)){
-			callback(false);
-			return;
-		}
-		callback(true, item.side);
 	});
 };
 
@@ -468,6 +434,8 @@ exports.getUserPos = function(what, callback){
 			
 			//console.log(item1);
 			for(var i=0; i<item1.mem.length; i++){
+				console.log(item1.mem[i].uid);
+				console.log(item._id);
 				if(item1.mem[i].uid.toString() == item._id.toString()){ 
 					result.pos = i;
 					break;
@@ -487,6 +455,7 @@ exports.getUserPos = function(what, callback){
 exports.getUserInfo = function(what, callback){
 	var col = this.getCol('users');
 	col.find(what, {uname:1, fname:1, lname:1}).toArray(function(err, items){
+		console.log(items);
 		if(err){
 			console.log('DB ERROR: ', err);
 			callback(false);
@@ -502,19 +471,9 @@ exports.getUserInfo = function(what, callback){
 
 exports.hasTeamCheck = function(what, callback){
 	var col = this.getCol('users');
-	col.findOne(what, function(err, item){
-		if(err){
-			console.log('DB ERROR: ', err);
-			callback(false);
-			return;
-		}
-		if(!utils.isObj(item)){
-			console.log('User authentication error.');
-			callback(false);
-			return;
-		}
-		if(item.team) callback(false);
-		else callback(true);
+	//what.inTeam=
+	col.find(what).toArray(function(err, items){
+		//TODO
 	});
 };
 
@@ -551,7 +510,7 @@ exports.registActivate = function(what, callback){
 				return;
 			}
 			col.find({verify:what}, {email:1, pass:1}).toArray(function(err, items){
-				console.log('User '+ items[0].email +' is activated');
+				console.log('User is activated');
 				callback(true, items[0]);
 			});
 		});

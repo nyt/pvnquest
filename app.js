@@ -46,12 +46,11 @@ app.get('/team', function(req, res){
 	obj.action = req.param('action');
 	obj.side = req.param('side');
 	
-	if(!obj.email || !obj.pass){
-		res.render('error', {page: 'error', error: 'User authentication failure.', advise: 'Please, login on the main page.'});
-		return;
-	}
-	
 	if(obj.action == 'create' && (obj.side=='pirate' || obj.side=='ninja')){
+		if(!obj.email || !obj.pass){
+			res.render('error', {page: 'error', error: 'User authentication failure.', advise: 'Please, login on the main page.'});
+			return;
+		}
 		func.createTeamPrep(obj, function(success, data){
 			if(success){
 				data.page = 'team_create';
@@ -78,7 +77,6 @@ app.get('/team', function(req, res){
 		res.redirect('home');
 	}
 });
-
 
 app.get('/error', function(req, res){
 	res.write('ERROR');
@@ -117,19 +115,45 @@ app.post('/regist', function(req, res){
 
 app.post('/createTeam', function(req, res){
 	var email = req.cookies['_pvna'],
-	 	pass = req.cookies['_pvnb'];
-	if(!email || !pass) return;
-		
+	 	pass = req.cookies['_pvnb'];	
 	req.body.usr = {};
 	req.body.usr.email = email;
 	req.body.usr.pass = pass;
-	func.createTeam(req.body, function(success, id){
-		if(success)
-			//res.redirect('/team?id='+id);
-			res.redirect('/notfound');
-		else
-			res.redirect('/error');
-	});
+	if(utils.is(email) && utils.is(pass)){
+		func.createTeam(req.body, function(success, data){
+			res.header('Content-Type', 'application/json');
+			var obj = {}
+			obj.success = success;
+			if(success){
+				obj.data = data;
+			}
+			res.json(obj);	
+		});
+	}else{
+		res.json({success:false});
+	}
+});
+
+app.post('/editTeam', function(req, res){
+	var email = req.cookies['_pvna'],
+	 	pass = req.cookies['_pvnb'];	
+	req.body.usr = {};
+	req.body.usr.email = email;
+	req.body.usr.pass = pass;
+	res.header('Content-Type', 'application/json');
+	if(utils.is(email) && utils.is(pass)){
+		func.editTeam(req.body, function(success, data){
+			res.header('Content-Type', 'application/json');
+			var obj = {}
+			obj.success = success;
+			if(success){
+				obj.data = data;
+			}
+			res.json(obj);	
+		});
+	}else{
+		res.json({success:false});
+	}
 });
 
 app.post('/login', function(req, res){
@@ -157,17 +181,26 @@ app.post('/listTeams', function(req, res){
 		res.json(obj);
 	});
 });
-/*
-app.get('/getUserInfo', function(req, res){
+
+app.post('/getUserInfo', function(req, res){
 	var body = {};
-	body.uname = res.cookie('uname');
-	body.pass = res.cookie('pass');
-	if(data.uname && data.pass){
-		func.getUserInfo(function(success, data){
-			
+	body.email = req.cookies['_pvna'];
+	body.pass = req.cookies['_pvnb'];
+	if(body.email && body.pass){
+		func.getUserInfo(body, function(success, data){
+			res.header('Content-Type', 'application/json');
+			var obj = {};
+			obj.success = success;
+			if(success){
+				obj.data = data; 
+			}
+			res.json(obj);
 		});
+	}else{
+		res.header('Content-Type', 'application/json');
+		res.json({success:false});
 	}
-});*/
+});
 
 //----------- XHR CHECKS
 app.post('/teamNameCheck', function(req, res){
@@ -177,21 +210,50 @@ app.post('/teamNameCheck', function(req, res){
 		res.json({success:success});
 	});
 });
+app.post('/getTeamSide', function(req, res){
+	func.getTeamSide(req.body, function(success, data){
+		res.header('Content-Type', 'application/json');
+		var obj = {}
+		obj.success= success;
+		if(success){
+			obj.side = data;
+		}
+		res.json(obj);
+	});
+});
 
 app.get('/hasTeamCheck', function(req, res){
 	var body = {};
-	body.email = res.cookie('_pvna');
-	body.pass = res.cookie('_pvnb');
+	body.email = req.cookies['_pvna'];
+	body.pass = req.cookies['_pvnb'];
 	
 	res.header('Content-Type', 'application/json');
-	if(data.email && data.pass){
-		func.hasTeamCheck(data, function(success){
+	if(body.email && body.pass){
+		func.hasTeamCheck(body, function(success){
 			res.json({success:success});
 		});
 	}
 	else{
 		res.json({success:false});
 	}
+});
+
+app.get('/getUserPos', function(req, res){
+	var body = {};
+	body.email = req.cookies['_pvna'];
+	body.pass = req.cookies['_pvnb'];
+	res.header('Content-Type', 'application/json');
+	if(body.email && body.pass){
+		func.getUserPos(body, function(success, data){
+			var obj = {};
+			obj.success = success;
+			if(success){
+				obj.data = data;
+			}
+			res.json(obj);
+		});
+	}
+	else res.json({success:false});
 });
 
 app.post('/registCheck', function(req, res){
