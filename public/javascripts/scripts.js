@@ -4,60 +4,84 @@ $ = jQuery;
 
 (function(){
 	this.LOGIN_FORM = 
-		'<form class="loginForm boardForm">\
-			<span>Login</span>\
-			<label for="lf_email">Email: </label><input type="text" id="lf_email"/>\
-			<label for="lf_pass">Password: </label><input type="password" id="lf_pass"/>\
-			<input type="submit" id="lf_login" value="Login"/>\
-			<input type="button" id="lf_cancel" value="Cancel"/>\
-		</form>';
+		'<form class="loginForm boardForm">'+
+			'<span>Login</span>'+
+			'<label for="lf_email">Email: </label><input type="text" id="lf_email"/>'+
+			'<label for="lf_pass">Password: </label><input type="password" id="lf_pass"/>'+
+			'<input type="submit" id="lf_login" value="Login"/>'+
+			'<input type="button" id="lf_cancel" value="Cancel"/>'+
+		'</form>';
 	this.REGIST_FORM = 
-		'<form class="registForm boardForm">\
-			<span>Registration</span>\
-			<label for="rf_fname">Your first name:</label><input type="text" id="rf_fname" maxlength=32 />\
-			<label for="rf_lname">Your last name:</label><input type="text" id="rf_lname" maxlength=32 />\
-			<label for="rf_uname">Choose a nickname:</label><input type="text" id="rf_uname" maxlength=32 />\
-			<label for="rf_email">Enter your e-mail:</label><input type="text" id="rf_email" maxlength=32 />\
-			<label for="rf_pass">Choose a password:</label><input type="password" id="rf_pass" maxlength=32 />\
-			<label for="rf_repass">Please, retype the password:</label><input type="password" id="rf_repass" maxlength=32 />\
-			<input type="submit" id="rf_regist" value="Register"/>\
-			<input type="button" id="rf_cancel" value="Cancel"/>\
-		</form>\
-		<div class="registIcons">\
-			<div id="i_fname" name="rf_fname" class="registIco"></div>\
-			<div id="i_lname" name="rf_lname" class="registIco"></div>\
-			<div id="i_uname" name="rf_uname" class="registIco"></div>\
-			<div id="i_email" name="rf_email" class="registIco"></div>\
-			<div id="i_pass" name="rf_pass" class="registIco"></div>\
-			<div id="i_repass" name="rf_repass" class="registIco"></div>\
-		</div>';
+		'<form class="registForm boardForm">'+
+			'<span>Registration</span>'+
+			'<label for="rf_fname">Your first name:</label><input type="text" id="rf_fname" maxlength=32 />'+
+			'<label for="rf_lname">Your last name:</label><input type="text" id="rf_lname" maxlength=32 />'+
+			'<label for="rf_uname">Choose a nickname:</label><input type="text" id="rf_uname" maxlength=32 />'+
+			'<label for="rf_email">Enter your e-mail:</label><input type="text" id="rf_email" maxlength=32 />'+
+			'<label for="rf_pass">Choose a password:</label><input type="password" id="rf_pass" maxlength=32 />'+
+			'<label for="rf_repass">Please, retype the password:</label><input type="password" id="rf_repass" maxlength=32 />'+
+			'<input type="submit" id="rf_regist" value="Register"/>'+
+			'<input type="button" id="rf_cancel" value="Cancel"/>'+
+		'</form>'+
+		'<div class="registIcons">'+
+			'<div id="i_fname" name="rf_fname" class="registIco"></div>'+
+			'<div id="i_lname" name="rf_lname" class="registIco"></div>'+
+			'<div id="i_uname" name="rf_uname" class="registIco"></div>'+
+			'<div id="i_email" name="rf_email" class="registIco"></div>'+
+			'<div id="i_pass" name="rf_pass" class="registIco"></div>'+
+			'<div id="i_repass" name="rf_repass" class="registIco"></div>'+
+		'</div>';
 	this.NOTIFICATION = 
-		'<div class="notification boardForm">\
-			<span id="msg"></span>\
-			<input type="submit" id="msg_ok" value="OK"/>\
-		</div>';
+		'<div class="notification boardForm">'+
+			'<span id="msg"></span>'+
+			'<input type="submit" id="msg_ok" value="OK"/>'+
+		'</div>';
 	this.LOGGED_AS =  
-		'Welcome, <span id="loggedUser"></span>!\
-		<a id="logoutLink" class="lbLink">Logout</a>';
+		'Welcome, <span id="loggedUser"></span>!'+
+		'<a id="logoutLink" class="lbLink">Logout</a>';
 	this.BOARD_CONTENT = 
-		'<div class="boardContent boardForm">\
-				<span id="boardCaption"></span>\
-		 </div>';
+		'<div class="boardContent boardForm">'+
+				//'<span id="boardCaption"></span>'+
+		'</div>';
 	this.TEAM_LI =
-		'<li class="team_li">\
-			<div class="team_pic">\
-				<img />\
-			</div>\
-			<div class="team_info">\
-				<div class="team_name"></div>\
-				<ul></ul>\
-			</div>\
-		</li>';
-	this.ROAMS = '<div>Unfortunately, there are no new quests to roam in nearby tavern...</div>';
-	this.MISSIONS = '<div>Unfortunately, mission board is empty now...</div>';
-	this.RULES = 
-		'<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>\
-		<div class="rulesImg"></div>';
+		'<li class="team_li">'+
+			'<div class="team_name"></div>'+
+			'<div class="team_pic">&#9830;</div>'+
+			'<div class="team_info">'+
+				'<ul></ul>'+
+		'</li>';
+	this.ROAMS =
+		'<div class="boardContent boardForm">'+
+			//'<span>Roams</span>'+
+			'<div>Unfortunately, there are no new quests in this tavern...</div>'+
+		'</div>';
+	this.MISSIONS =
+		'<div class="boardContent boardForm">'+
+			//'<span>Missions</span>'+
+			'<div>Unfortunately, mission board is empty now...</div>'+
+		'</div>';
+	this.CREWS = 'Currently it seems that there are no pirate crews in this tavern.';
+	this.SQUADS = 'Maybe there are several ninja squads in this room, but you don\'t see them.';
+	this.RULES =
+		'<div class="boardContent boardForm">'+
+			'<div class="rules">'+
+				'<span>Story</span>'+
+				'<p>Nobody remembers how it started... Someone says, that two brothers had a fight over a girl, someone - that it was just beginning of the war for succession, but one is known for sure – since the dawn of time The Great Tournament, ineluctable as sunrise, is held to solve eternal dispute between Pirates and Ninjas. It is told, that last one left undefeated in this bloody massacre receives an absolute power to dominate the world till the next Tournament.</p>'+
+				'<span>Rules of The Tournament</span>'+
+				'<p>One is known for sure – no mortal can compete in it alone. Only combination of three ones gives a chance to fight for eternal glory.</p>'+
+				'<p><em>Only teams of exaclty 3 people are allowed to participate in the quest, e.g. teams with 2, 4 or 1 person are not allowed, so please find your teammates a.s.a.p.</em>.</p>'+
+				'<p>When teams fight against each other they use ancient symbols of powe as weapons. There are five of them – Monkey, Robot, Zombie, Pirate and Ninja. The picture below depicts ancient rule that ties symbols together.</p>'+
+				'<div class="rulesImg"></div>'+
+				'<p><em>Each team has 5 tokens. In the beginning of each round every team places 1 token in front with picture pointing downward. The winner is determined according to the relations that are described in picture. E.g. robot beats ninja, and monkey beats robot. Each battle is fought up to tree victories.</em></p>'+
+				'<p>It is told, when magic of token is released one member of opposite team is knocked down.</p>'+
+				'<p><em>Winning team determines, which player of opposite team is knoked out.</em></p>'+
+				'<p>For numerous years some captains and clan elders have trained their best followers for participating The Tournament. Specialized in powerful attacks or absolute defense team members have proven to be able to greatly influence the outcome of battle. But tokens of power require additional energy sources to release full potential of their users, so searching for those sources had been a reason for frequent small fights.</p>'+
+				'<em>Each member can chose his class from 3 available. Every class can use its ability for a price of 1 action point that can be found during quest. OFFENCE class add one additional token at the beginning of round. In such case team wins if any of its tokens wins. DEFENCE class can use its ability in beginning of the round to make the team defeat count as a draw. SUPPORT class can use any of this two abilities, if the respective class is present in this battle. Users that are knoked out cannot use their abilities.</em></p>'+
+			'</div>'+
+		'</div>';
+
+	this.COLOR_LIGHT = '#FFFFFF';
+	this.COLOR_DARK = '#220000';
 		
 	this.imageCache = [];
 	this.IMG_LINKS = {
@@ -123,15 +147,15 @@ $ = jQuery;
 			else if(what=='other'){
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board.png\')');
-				state.$board.css('color', '#FFFFFF');
+				state.$board.css('color', COLOR_LIGHT);
 			}else if(what=='pirates'){
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board_p.png\')');
-				state.$board.css('color','#000000');
+				state.$board.css('color', COLOR_DARK);
 			}else if(what=='ninjas'){
 				state.$board.css('visibility', 'visible');
 				state.$board.css('background-image', 'url(\'images/board_n.png\')');
-				state.$board.css('color','#FFFFFF');
+				state.$board.css('color', COLOR_LIGHT);
 			} else if(what=='toad'){
 				state.$toad.css('visibility', 'visible');
 			}
@@ -170,10 +194,10 @@ $ = jQuery;
 		
 		boardContent: function(what){
 			var $boardContent = $('.boardContent');
-			var $boardCaption = $('#boardCaption');
+			//var $boardCaption = $('#boardCaption');
 			
 			if(what==0 || what==3){
-				$boardCaption.html((what==0)?'Crews':'Squads');
+				//$boardCaption.html((what==0)?'Crews':'Squads');
 				
 				var $teamList = $(doc.createElement('ul'));
 				$teamList.addClass('teamList');
@@ -182,36 +206,40 @@ $ = jQuery;
 					if(res.success){
 						for(var i=0; i<res.list.length; i++){
 							var team = res.list[i];
-							
+
 							var $teamli = $(TEAM_LI);
-							$teamli.find('.team_pic img').attr('src', '/images/defteam.png');
-							$teamli.find('.team_name').html(team.name);
+							var $teamName = $teamli.find('.team_name');
+
+							$teamName.unbind('click').click(function(){
+								location.href = '/team?id='+team._id;
+							});
+
+							//var $teamImg = $teamli.find('.team_pic');
+							//$teamImg.attr('src','images/defteam.png');
+							
 							var $team_mems = $teamli.find('.team_info ul');
+
 							for(var j=0; j<3; j++){
 								var mem = team.mem[j];
 								var $team_mem = $(doc.createElement('li'));
-								$team_mem.html(mem.fname + ' "' + mem.uname + '" ' + mem.lname);
+								$team_mem.html(mem.uname + ' [' + mem.fname + ' ' + mem.lname + ']');
 								$team_mems.append($team_mem);
 							}
 							$teamList.append($teamli);
-							$teamli.unbind('click').click(function(){
-								var l = '/team?id='+team._id;
-								location.href = l;
-							});
 						}
 					}else{
-						$teamList.html((what==0)?'Currently no pirate crews are roaming this tavern.':'There are several ninja squads in this castle, but you don\'t see them. Coz they\'re ninjas.');
+						$teamList.html((what==0) ? CREWS : SQUADS);
 					}
 				});
 				
 				$boardContent.append($teamList);
 				utils.hasTeamCheck(function(res){
 					if(res.success){
-						$teamList.html($teamList.html() + (what==0)?'Go, gather your crew! Yarr!':'Wanna be in ninja squad yourself?')
+						//$teamList.html($teamList.html() + ((what==0) ? 'Go, gather your crew! Yarr!' : 'Wanna create ninja squad yourself?'))
 						
 						var $createNew = $(doc.createElement('button'));
 						$createNew.addClass((what==0)?'createNewCrew':'createNewSquad');
-						$createNew.html('Create new');
+						$createNew.html('Create');
 						$boardContent.append($createNew);
 						$createNew.unbind('click').click(function(){
 							var l = ('/team?action=create&side=' + ((what==0)?'pirate':'ninja'));
@@ -421,7 +449,7 @@ function init(){
 	});
 
 	//---- assign secret click handler
-	$('.toggleSecret').click(function(){
+	$('.toggleSecret').hover(function(){
 		$('.secret').css('visibility','visible');
 	});
 	

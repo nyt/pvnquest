@@ -59,7 +59,7 @@ $ = jQuery;
 		},
 		
 		setWatermarks : function(){
-			state.$tmName.Watermark('Team title...');
+			state.$tmName.Watermark("Team title...");
 			state.$tmInfo.Watermark("Team legend...");
 			state.$p0_info.Watermark("Your legend...");
 		},
@@ -111,6 +111,7 @@ $ = jQuery;
 				$name.switchClasses('fieldCorrect', 'fieldError');
 			$.Watermark.ShowAll();
 		},
+ 
 		infoFieldCheck : function($field){
 			$.Watermark.HideAll();
 			if($field.val().length==0)
@@ -119,6 +120,7 @@ $ = jQuery;
 				$field.switchClasses('fieldError', 'fieldCorrect');
 			$.Watermark.ShowAll();
 		},
+ 
 		othersCheck : function($field1, $field2){
 			if($field1.selectedVal()!=$field2.selectedVal()){
 				if($field1.selectedVal().length>0)

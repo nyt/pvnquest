@@ -147,6 +147,9 @@ header .logo {
   margin: 0 auto;
   background-repeat: no-repeat;
   background-image: url("/images/hypnotoad.gif");
+  border-style: ridge;
+  border-width: 10px;
+  border-color: #000;
   z-index: 3;
   position: relative;
   top: -1100px;
@@ -171,7 +174,7 @@ header .logo {
   width: 300px;
   margin: 0 auto;
   font-size: 14px;
-  color: #fff;
+/*color #FFFFFF*/
 }
 .boardForm span {
   display: block;
@@ -201,8 +204,9 @@ header .logo {
   font-size: 14px;
   font-family: fantasy;
   color: #fff;
+  cursor: pointer;
   border: 0 none;
-  background: transparent url("/images/button_bg1.png");
+  background: transparent url("/images/button_bg2.png");
 }
 .boardForm button.center {
   margin: 50px auto 0;
@@ -210,7 +214,7 @@ header .logo {
 }
 button.createNewSquad,
 button.createNewCrew {
-  width: 120px;
+  width: 80px;
   height: 30px;
   display: block;
   margin: 20px auto 0;
@@ -218,7 +222,7 @@ button.createNewCrew {
   font-family: fantasy;
   color: #fff;
   border: 0 none;
-  background: transparent url("/images/button_bg1.png");
+  background: transparent url("/images/button_bg2.png");
 }
 .boardContent {
   width: 350px;
@@ -226,35 +230,37 @@ button.createNewCrew {
 }
 .boardContent > ul {
   padding: 0;
-  margin: 20px 0 0 0;
+  margin: 0;
 }
 .boardContent > ul > li {
   list-style-type: none;
   margin-bottom: 20px;
-  cursor: pointer;
+/*cursor pointer*/
 }
-.boardContent > ul > li:hover {
-  -moz-box-shadow: 0 0 2px 3px rgba(255,255,255,0.50);
-}
--webkit-box-shadow 002px3pxrgba(255,
-255,
-255,
-0.5) {
-  box-shadow: 0 0 2px 3px rgba(255,255,255,0.50);
-}
+/*.boardContent > ul > li:hover
+	-moz-box-shadow 0 0 2px 3px rgba(255,255,255,0.5)
+    -webkit-box-shadow 0 0 2px 3px rgba(255,255,255,0.5)
+	box-shadow 0 0 2px 3px rgba(255,255,255,0.5)*/
 .team_li .team_pic {
   float: left;
+  height: 50px;
+  width: 50px;
+  font-size: 46px;
 }
 .team_li .team_info {
-  margin: 0 0 0 80px;
+  margin: 0 0 0 50px;
 }
-.team_li .team_info .team_name {
+.team_li .team_name {
+  margin: 0 0 0 0;
   font-size: 16pt;
   font-weight: bold;
+}
+.team_name:hover {
+  cursor: pointer;
   text-decoration: underline;
 }
 .team_li .team_info ul {
-  margin: 10px 0 0 15px;
+  margin: 0 0 0 15px;
   padding: 0;
 }
 .boardText input[type*="button"] {
@@ -265,7 +271,7 @@ button.createNewCrew {
   font-family: fantasy;
   border: 0 none;
   color: #fff;
-  background: transparent url("/images/button_bg1.png");
+  background: transparent url("/images/button_bg2.png");
 }
 .loginForm {
   padding-top: 100px;
@@ -287,6 +293,11 @@ button.createNewCrew {
   font-family: fantasy;
   font-size: 18px;
   text-align: center;
+}
+.rules {
+  height: 440px;
+  font-size: 10pt;
+  overflow: auto;
 }
 /*-------- cor/err icons styles ------*/
 .registIco {
@@ -311,6 +322,7 @@ button.createNewCrew {
   width: 200px;
   height: 200px;
   background-image: url("/images/diagram.png");
+  margin: 0 auto;
 }
 /*-------- team page styles ------*/
 .teamBlock {
@@ -350,6 +362,9 @@ button.createNewCrew {
   height: 140px;
   resize: none;
 }
+.teamInfo {
+  height: 140px;
+}
 .divider {
   margin: 15px auto;
   width: 300px;
@@ -367,7 +382,7 @@ button.createNewCrew {
   float: left;
 }
 .memberAvatar {
-  width: 154px;
+  width: 160px;
   height: 120px;
   margin: 0 auto;
 }
@@ -391,6 +406,9 @@ button.createNewCrew {
   width: 120px;
   height: 120px;
   margin: 0 auto;
+  border-style: ridge;
+  border-color: #000;
+  border-width: 3px;
 }
 .defAva {
   background-image: url("/images/avatars/noplayer.png");
@@ -436,7 +454,8 @@ span.underlined {
   font-family: fantasy;
   border: 0 none;
   color: #fff;
-  background: transparent url("/images/button_bg1.png");
+  cursor: pointer;
+  background: transparent url("/images/button_bg2.png");
 }
 .fieldError {
   box-shadow: 0 0 4px 5px rgba(255,0,0,0.80);

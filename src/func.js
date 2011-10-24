@@ -3,7 +3,7 @@ var utils = require('./nytUtils.js');
 var mongo = require('mongoskin');
 var hashlib = require('hashlib');
 var mailer = require('nodemailer');
-var async = require('async');
+//var async = require('async');
 
 var db = mongo.db('localhost/pvnquest');
 
@@ -19,6 +19,7 @@ var UPDATE_OPT_MULTI = {upset:false, multi:true, safe:false};
 var UPDATE_OPT = {upset:false, multi:false, safe:false};
 var DEF_ERR = {error: null, advise: null};
 var NOT_FOUND = {error: '404', advise: 'No page found'};
+var TEAM_DELETED = {error: 'Success', advise: 'Team succesfully deleted'};
 
 mailer.SMTP = {
 	host: 'smtp.gmail.com',
@@ -55,10 +56,10 @@ exports.registUser = function(data, callback){
 				to: data.email,
 				subject:'Pirates vs Ninjas Quest account activation',
 				body:
-					'Someone has used this e-mail for registration on pvnquest.tk\n'+
-					'If it was you, please click on the link below to activate your account\n'+
-					'http://pvnquest.tk/activate?h='+data.verify+'\n\n'+
-					'Pirates vs Ninjas Quest Bot\n'
+'Someone has used this e-mail for registration on pvnquest.tk\n'+
+'If it was you, please click on the link below to activate your account\n'+
+'http://pvnquest.tk/activate?h='+data.verify+'\n\n'+
+'Pirates vs Ninjas Quest Bot\n'
 			},
 			function(error, success){
 				if(error){
@@ -203,22 +204,26 @@ exports.getTeam = function(data, callback){
 			callback(false, DEF_ERR);
 			return;
 		}
-		if(!utils.isObj(item)){
+		if(item==null){
 			console.log('No team found by the specified id');
 			callback(false, NOT_FOUND);
 			return;
 		}
-		
-		var team = item;	
+
+		console.log(data.teamID);
+		console.log(item);
+		var team = item;
 			
 		//--- check if user is in the team
 		users.findOne({email: data.email, pass: data.pass}, function(err, item1){
 			team.viewerInTeam = false;
 			if(err){
 				console.log('DB ERROR: ', err);
-				console.log('Viewer is not in requested team');
+				callback(false, DEF_ERR);
+				return
 			}
-			if(utils.isObj(item1)){
+				
+			if(utils.isObj(item1) && item1!=null){
 				for(var i=0; i<team.mem.length; i++) 
 					if(team.mem[i].uid.toString() == item1._id.toString()){
 						team.viewerInTeam = true;
@@ -241,7 +246,7 @@ exports.createTeamPrep = function(data, callback){
 		pass : data.pass,
 	};
 	
-	var result = {};	
+	var result = {};
 	users.find(viewer, {uname:1, fname:1, lname:1, team:1, side:1}).toArray(function(err, items){
 		if(err){
 			console.log('DB ERROR: ', err);
@@ -278,6 +283,22 @@ exports.createTeamPrep = function(data, callback){
 		});
 	});	
 };
+
+exports.deleteTeam = function(data, callback){
+	var teamName=data.teamName;
+
+	var users = this.getCol('users');
+	var teams = this.getCol('teams');
+
+	teams.remove({name:teamName});
+	users.update({team:teamName}, {$unset:{side:1, team:1}}, UPDATE_OPT_MULTI, function(err){
+			if(err){
+				console.log('DB ERROR: ', err);
+				callback(false, DEF_ERROR);
+			}
+			callback(true, TEAM_DELETED);
+	});
+}
 
 exports.editTeam = function(data, callback){
 	var users = this.getCol('users');

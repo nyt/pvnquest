@@ -188,14 +188,21 @@ $ = jQuery;
 			});
 			
 		},
+		
 		deleteTeam : function(){
-			
+			var obj = {};
+			obj.teamName = $('.titleBlock').html();
+			utils.sendMessage('deleteTeam', obj, function(res){
+				location.href = "/";
+			});
 		},
 		
 		initCheck : function(){
 			//var email = $.cookie('_pvna');
 			//var pass = $.cookie('_pvnb');
-		
+			$('#back').click(function(){
+				location.href="/";
+			});
 			$('#edit').click(function(){
 				utils.editTeamChange();
 			});
@@ -217,7 +224,7 @@ $ = jQuery;
 				url: type,
 				data: data,
 				type: (data)?'POST':'GET',
-				success: callback,	
+				success: callback,
 			});
 		}
 

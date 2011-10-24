@@ -62,7 +62,7 @@ app.get('/team', function(req, res){
 			}
 		});
 	}	
-	else if(obj.teamID){	
+	else if(obj.teamID){
 		func.getTeam(obj, function(success, data){
 			if(success){
 				data.page = 'team';
@@ -127,16 +127,24 @@ app.post('/createTeam', function(req, res){
 			if(success){
 				obj.data = data;
 			}
-			res.json(obj);	
+			res.json(obj);
 		});
 	}else{
 		res.json({success:false});
 	}
 });
 
+app.post('/deleteTeam', function(req, res){
+	console.log(req.body);
+	func.deleteTeam(req.body, function(success, data){
+		data.page = 'error';
+		res.render('error', data);
+	});
+});
+
 app.post('/editTeam', function(req, res){
 	var email = req.cookies['_pvna'],
-	 	pass = req.cookies['_pvnb'];	
+	 	pass = req.cookies['_pvnb'];
 	req.body.usr = {};
 	req.body.usr.email = email;
 	req.body.usr.pass = pass;
