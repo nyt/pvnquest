@@ -7,6 +7,45 @@ var mailer = require('nodemailer');
 
 var db = mongo.db('localhost/pvnquest');
 
+//----- Functions and classes Declaration
+
+
+function DisplayError(brief, descr){
+	if(!(utils.isStr(brief) && utils.isStr(descr)))
+		throw new Error('Wrong error handling!');
+	else{
+		this.errObj = {brief: brief, descr: descr};
+		Error.call(this, brief);
+		Error.captureStackTrace(this, arguments.callee);
+	}
+}
+DisplayError.prototype.__proto__ = Error.prototype;
+
+function XhrError(brief, descr){
+	if(!(utils.isStr(brief) && utils.isStr(descr)))
+		throw new Error('Wrong error handling!');
+	else{
+		this.errObj = {brief: brief, descr: descr};
+		Error.call(this, brief);
+		Error.captureStackTrace(this, arguments.callee);
+	}
+}
+XhrError.prototype.__proto__ = Error.prototype;
+
+//----- LogError(<string>, <boolean>)
+function LogError(error, displayDef){
+	if(!utils.isStr(error))
+		throw new Error('Wrong error handling!');
+	else{
+		this.errBrief = error;
+		this.displayDef = (displayDef) ? true : false;
+		Error.call(this, error);
+		Error.captureStackTrace(this, arguments.callee);
+	}
+}
+LogError.prototype.__proto__ = Error.prototype;
+
+
 function getBRand(){
 	var r = Math.round(Math.random());
 	return (r==1)?true:false;
@@ -55,11 +94,10 @@ exports.registUser = function(data, callback){
 				sender: 'bot.pvnquest@gmail.com',
 				to: data.email,
 				subject:'Pirates vs Ninjas Quest account activation',
-				body:
-'Someone has used this e-mail for registration on pvnquest.tk\n'+
-'If it was you, please click on the link below to activate your account\n'+
-'http://pvnquest.tk/activate?h='+data.verify+'\n\n'+
-'Pirates vs Ninjas Quest Bot\n'
+				body:'Someone has used this e-mail for registration on pvnquest.tk\n'+
+					'If it was you, please click on the link below to activate your account\n'+
+					'http://pvnquest.tk/activate?h='+data.verify+'\n\n'+
+					'Pirates vs Ninjas Quest Bot\n'
 			},
 			function(error, success){
 				if(error){
@@ -507,7 +545,7 @@ exports.getUserPos = function(what, callback){
 
 exports.getUserInfo = function(what, callback){
 	var col = this.getCol('users');
-	col.find(what, {uname:1, fname:1, lname:1}).toArray(function(err, items){
+	col.find(what, {uname:1, fname:1, lname:1, team:1, side:1}).toArray(function(err, items){
 		if(err){
 			console.log('DB ERROR: ', err);
 			callback(false);

@@ -41,7 +41,13 @@ $ = jQuery;
 		'<a id="logoutLink" class="lbLink">Logout</a>';
 	this.BOARD_CONTENT = 
 		'<div class="boardContent boardForm">'+
-				//'<span id="boardCaption"></span>'+
+			'<span id="boardCaption"></span>'+
+			'<div class="scroller">' +
+				'<div class="scrollbar"><div class="track"><div class="thumb">&#x2b0d<div class="end"></div></div></div></div>' +
+				'<div class="viewport">'+
+					'<div class="overview"></div>' +
+				'</div>' +
+			'</div>' +
 		'</div>';
 	this.TEAM_LI =
 		'<li class="team_li">'+
@@ -49,23 +55,23 @@ $ = jQuery;
 			'<div class="team_pic">&#9830;</div>'+
 			'<div class="team_info">'+
 				'<ul></ul>'+
+			'</div>'+
 		'</li>';
 	this.ROAMS =
-		'<div class="boardContent boardForm">'+
+		//'<div class="boardContent boardForm">'+
 			//'<span>Roams</span>'+
-			'<div>Unfortunately, there are no new quests in this tavern...</div>'+
-		'</div>';
+			'<p>Unfortunately, there are no new quests in this tavern...</p>';
+		//'</div>';
 	this.MISSIONS =
-		'<div class="boardContent boardForm">'+
+		//'<div class="boardContent boardForm">'+
 			//'<span>Missions</span>'+
-			'<div>Unfortunately, mission board is empty now...</div>'+
-		'</div>';
+			'<p>Unfortunately, mission board is empty now...</p>';
+		//'</div>';
 	this.CREWS = 'Currently it seems that there are no pirate crews in this tavern.';
 	this.SQUADS = 'Maybe there are several ninja squads in this room, but you don\'t see them.';
 	this.RULES =
-		'<div class="boardContent boardForm">'+
 			'<div class="rules">'+
-				'<span>Story</span>'+
+				//'<span>Story</span>'+
 				'<p>Nobody remembers how it started... Someone says, that two brothers had a fight over a girl, someone - that it was just beginning of the war for succession, but one is known for sure – since the dawn of time The Great Tournament, ineluctable as sunrise, is held to solve eternal dispute between Pirates and Ninjas. It is told, that last one left undefeated in this bloody massacre receives an absolute power to dominate the world till the next Tournament.</p>'+
 				'<span>Rules of The Tournament</span>'+
 				'<p>One is known for sure – no mortal can compete in it alone. Only combination of three ones gives a chance to fight for eternal glory.</p>'+
@@ -77,8 +83,7 @@ $ = jQuery;
 				'<p><em>Winning team determines, which player of opposite team is knoked out.</em></p>'+
 				'<p>For numerous years some captains and clan elders have trained their best followers for participating The Tournament. Specialized in powerful attacks or absolute defense team members have proven to be able to greatly influence the outcome of battle. But tokens of power require additional energy sources to release full potential of their users, so searching for those sources had been a reason for frequent small fights.</p>'+
 				'<em>Each member can chose his class from 3 available. Every class can use its ability for a price of 1 action point that can be found during quest. OFFENCE class add one additional token at the beginning of round. In such case team wins if any of its tokens wins. DEFENCE class can use its ability in beginning of the round to make the team defeat count as a draw. SUPPORT class can use any of this two abilities, if the respective class is present in this battle. Users that are knoked out cannot use their abilities.</em></p>'+
-			'</div>'+
-		'</div>';
+			'</div>';
 
 	this.COLOR_LIGHT = '#FFFFFF';
 	this.COLOR_DARK = '#220000';
@@ -181,23 +186,18 @@ $ = jQuery;
 					utils.showBoard('hide');
 					return false;
 				});
-			}else if(what==0 || what==3){
+			}else if(what>=0 && what<=5){
 				state.$board.html(BOARD_CONTENT);
-			}else if(what==1){
-				state.$board.html(ROAMS);
-			}else if(what==4){
-				state.$board.html(MISSIONS);
-			}else if(what==2 || what==5){
-				state.$board.html(RULES);
-			}
+			}	
 		},
 		
 		boardContent: function(what){
 			var $boardContent = $('.boardContent');
-			//var $boardCaption = $('#boardCaption');
+			var $boardOverview = $boardContent.find('.overview');
+			var $boardCaption = $('#boardCaption');
 			
 			if(what==0 || what==3){
-				//$boardCaption.html((what==0)?'Crews':'Squads');
+				$boardCaption.html((what==0)?'Crews':'Squads');
 				
 				var $teamList = $(doc.createElement('ul'));
 				$teamList.addClass('teamList');
@@ -209,10 +209,14 @@ $ = jQuery;
 
 							var $teamli = $(TEAM_LI);
 							var $teamName = $teamli.find('.team_name');
-
-							$teamName.unbind('click').click(function(){
-								location.href = '/team?id='+team._id;
-							});
+							
+							$teamName.html(team.name);
+							$teamName.unbind('click').click((function(_id){
+								return function(){
+									var url = '/team?id='+_id;
+									location.href = url;
+								};
+							})(team._id));
 
 							//var $teamImg = $teamli.find('.team_pic');
 							//$teamImg.attr('src','images/defteam.png');
@@ -230,9 +234,11 @@ $ = jQuery;
 					}else{
 						$teamList.html((what==0) ? CREWS : SQUADS);
 					}
+					
+					$boardOverview.append($teamList);
+					$boardContent.tinyscrollbar({sizethumb:30});
 				});
 				
-				$boardContent.append($teamList);
 				utils.hasTeamCheck(function(res){
 					if(res.success){
 						//$teamList.html($teamList.html() + ((what==0) ? 'Go, gather your crew! Yarr!' : 'Wanna create ninja squad yourself?'))
@@ -248,6 +254,21 @@ $ = jQuery;
 						});
 					}
 				});
+			}
+			else if(what==1){
+				$boardCaption.html('Roams');
+				$boardOverview.html(ROAMS);
+				$boardContent.tinyscrollbar({sizethumb:30});
+			}
+			else if(what==4){
+				$boardCaption.html('Missions');
+				$boardOverview.html(MISSIONS);
+				$boardContent.tinyscrollbar({sizethumb:30});
+			}
+			else if(what==2 || what==5){
+				$boardCaption.html((what==2) ? 'Rumors' : 'Legends');
+				$boardOverview.html(RULES);
+				$boardContent.tinyscrollbar({sizethumb:30});
 			}
 		},
 		
@@ -373,12 +394,13 @@ $ = jQuery;
 				utils.sendMessage('getUserInfo', {email:email, pass:pass}, function(res){
 					if(res.success) {
 						$('#loggedUser').html(res.data.uname);
-				}
-			})
+						if(res.data.side) $('.loginBlock').append((res.data.side=='pirate') ? '<div>You are a <u>Pirate</u> of the <u>'+ res.data.team +'</u> crew</div>' : 
+																						    '<div>You are a <u>Ninja</u> of the <u>'+ res.data.team +'</u> squad</div>');
+					}
+				})
 
-			$('.loginBlock').html(LOGGED_AS);
-			$('#logoutLink').unbind('click').click(utils.logoutHandler);
-							
+				$('.loginBlock').html(LOGGED_AS);
+				$('#logoutLink').unbind('click').click(utils.logoutHandler);			
 			/* ------- TODO Change content of crew/squads block -------- */
 			}
 		},
@@ -420,6 +442,8 @@ function init(){
 	//---- assign states
 	state.$board = $('.board');
 	state.$buttons = $('.menuButton');
+
+	$('.newsBody').tinyscrollbar({sizethumb:30});
 
 	//---- assign click handler for hiding BOARD
 	$('.mainBody').get(0).addEventListener('click', function(event){

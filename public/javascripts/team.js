@@ -193,7 +193,11 @@ $ = jQuery;
 			var obj = {};
 			obj.teamName = $('.titleBlock').html();
 			utils.sendMessage('deleteTeam', obj, function(res){
-				location.href = "/";
+				if(res.success)
+					location.href = "/";
+				else{
+					alert(res.error + '\n\n' + res.advise);
+				}
 			});
 		},
 		
@@ -207,7 +211,9 @@ $ = jQuery;
 				utils.editTeamChange();
 			});
 			$('#delete').click(function(){
-				utils.deleteTeam();
+				var c = confirm("Are you sure, you want to delete your team?");
+				if(c==true)
+					utils.deleteTeam();
 			});
 			
 			utils.getTeamSide(function(res){

@@ -11,10 +11,10 @@ div.mainBody.hb
 
 		div.board(style="visibility:visible")
 			div.boardForm(style="color:#FFFFFF")
-				- if (error != null)
+				- if (brief != null)
 					span(style="padding-top:100px")= error
-					- if (advise)
-						span= advise
+					- if (descr != null)
+						span= descr
 				- else  	
 					span(style="padding-top:100px") Server error occured. 
 					span We apologize for incovenience, please, try again. 

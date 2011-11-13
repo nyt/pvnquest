@@ -7,10 +7,11 @@ var express = require('express');
 var func = require('./src/func.js');
 var utils = require('./src/nytUtils.js');
 
+// Initialization 
+
 var app = module.exports = express.createServer();
 
 // Configuration
-
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -21,6 +22,11 @@ app.configure(function(){
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+
+	app.use(function(err, req, res, next) {
+  		console.log('error handling: ' + err);
+	});
+
 });
 
 app.configure('development', function(){
@@ -30,6 +36,32 @@ app.configure('development', function(){
 app.configure('production', function(){
   app.use(express.errorHandler());
 });
+
+//----------------- error handling
+/*
+app.error(function(err, res, req, next){
+	
+
+	/*
+	if(err instanceof DisplayError){
+		console.log('ERROR - ' + err.errObj.brief + '\n   ' + err.errObj.descr);
+		res.render('error', err.errObj);
+	}
+	else if(err instanceof XhrError){
+		console.log('ERROR - ' + err.errObj.brief + '\n   ' + err.errObj.descr);
+		res.header('Content-Type', 'application/json');
+		res.json({success: false, data: err.errObj});
+	}
+	else if(err instanceof LogError){
+		console.log('ERROR - ' + err.errBrief);
+		if(err.displayDef)
+			res.render('error', {brief: null, descr: null});
+	}
+	else{
+		next(err);
+	}
+});*/
+
 
 // Routes
 
@@ -87,9 +119,10 @@ app.get('/notfound', function(req, res){
 	res.end();
 });
 
+/*
 app.get('/adminInterface', function(req, res){
 	res.render('admin');
-});
+}); */
 
 app.get('/activate', function(req, res){
 	func.registActivate(req.param('h'), function(success, data){
@@ -137,8 +170,14 @@ app.post('/createTeam', function(req, res){
 app.post('/deleteTeam', function(req, res){
 	console.log(req.body);
 	func.deleteTeam(req.body, function(success, data){
-		data.page = 'error';
-		res.render('error', data);
+		//data.page = 'error';
+		//res.render('error', data);
+		var obj = {}
+		obj.success = success;
+		if(success){
+			obj.data = data;
+		}
+		res.json(obj);
 	});
 });
 
@@ -270,6 +309,13 @@ app.post('/registCheck', function(req, res){
 		res.json({success:success});
 	});
 });
+
+/*
+app.get('/*', function(req, res){
+	console.log("Im default route");
+	res.send("def route\n");
+});*/
+
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

@@ -210,7 +210,7 @@ button.createNewSquad, button.createNewCrew
 	width 80px
 	height 30px
 	display block
-	margin 20px auto 0
+	margin 30px auto 0
 	font-size 14px
 	font-family fantasy
 	color white
@@ -219,18 +219,23 @@ button.createNewSquad, button.createNewCrew
 
 .boardContent
 	width 350px
+	height 450px
 	padding-top 30px
-.boardContent > ul
-	padding 0
+.boardContent #boardCaption
 	margin 0
-.boardContent > ul > li
-	list-style-type none
-	margin-bottom 20px
-	/*cursor pointer*/
+.boardContent .teamList
+	padding 10px 0
+	margin 0
+	list-style none
+.boardContent .teamList .team_li
+	list-style none
+	margin-top 15px
+		
 /*.boardContent > ul > li:hover
 	-moz-box-shadow 0 0 2px 3px rgba(255,255,255,0.5)
     -webkit-box-shadow 0 0 2px 3px rgba(255,255,255,0.5)
 	box-shadow 0 0 2px 3px rgba(255,255,255,0.5)*/
+
 
 .team_li .team_pic
 	float left
@@ -241,7 +246,7 @@ button.createNewSquad, button.createNewCrew
 	margin 0 0 0 50px
 .team_li .team_name
 	margin 0 0 0 0
-	font-size 16pt
+	font-size 14pt
 	font-weight bold
 .team_name:hover
 	cursor pointer
@@ -282,9 +287,7 @@ button.createNewSquad, button.createNewCrew
 	text-align center
 
 .rules
-	height 440px
 	font-size 10pt
-	overflow auto
 
 /*-------- cor/err icons styles ------*/
 
@@ -460,3 +463,14 @@ span.underlined
 	margin 10px
 	padding 5px
 	color #00FF00
+
+
+/*------------ scroolllll ----*/
+/*.scroll { width: 520px; margin: 20px 0 10px; }*/
+.scroller .viewport { height: 350px; overflow: hidden; position: relative; border-top: 1px solid; border-bottom: 1px solid; }
+.scroller .overview { position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
+.scroller .scrollbar{ background: transparent no-repeat 0 0; position: relative; background-position: 0 0; float: right; width: 15px; }
+.scroller .track { background: transparent  no-repeat 0 100%; height: 100%; width:13px; position: relative; padding: 0 1px; }
+.scroller .thumb { background: transparent  no-repeat 50% 100%; height: 20px; font-size: 20pt; width: 25px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left: -5px; }
+.scroller .thumb .end { background: transparent no-repeat 50% 0; overflow: hidden; height: 5px; width: 25px; }
+.scroller .disable { display: none; }
