@@ -2,3 +2,15 @@ PvN Quest repo
 more info soon
 
 Seems like beta... xD
+
+Issues:
+
+1. [ ] Write copyright notice and "Don't use IE"
+2. [ ] Change fantasy font to something specific (Chome uses Arial Impact X_X)
+3. [ ] Fix bug with not displaying news text in Chrome
+4. [ ] Change scroller symbol to &xxxx; notation (Chrome and Firefox don't display it correctly)
+5. [ ] Check what is with e-mail confirmation (ukr.net doesn't work, but gmail worked)
+6. [ ] Change board content to "Please wait" after hitting registrtion button
+7. [ ] Opera browser didn't show "Activation succesfull" on activation from e-mail (not sure what about other browsers)
+8. [ ] Change type of button on "Login successful/failed window" to 'submit'
+9. [X] "Create new crew/squad" don't work: page don't get response from server
