@@ -14,3 +14,5 @@ Issues:
 7. [ ] Opera browser didn't show "Activation succesfull" on activation from e-mail (not sure what about other browsers)
 8. [ ] Change type of button on "Login successful/failed window" to 'submit'
 9. [X] "Create new crew/squad" don't work: page don't get response from server
+
+Taking into consideration...
